@@ -1,0 +1,8 @@
+// rootProject : Gradle 프로젝트 구조에서 최상위 프로젝트를 나타내는 객체
+// - .name : 루트 프로젝트의 이름을 지정
+rootProject.name = 'vw-backend'
+
+// - include : 하위 프로젝트의 디렉토리 이름을 지정해 해당 디렉토리 안에 있는 빌드 스크립트를 실행
+include 'vw-api'
+include 'vw-core'
+include 'vw-domain'

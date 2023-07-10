@@ -1,15 +1,98 @@
-// Gradle 플러그인
+// plugins {} : Gradle 플러그인
+// - Gradle 7.0 이상에선 apply plugin: '(plugin-id)' 대신 plugins { id '(plugin-id)' } 사용을 권장
 plugins {
+    // 'java' : Gradle에 내장된 Java 플러그인을 프로젝트에 적용
     id 'java'
 
-    // Spring Framework 기반의 자바 애플리케이션의 개발 및 실행을 지원하는 프레임워크
+    // 'org.springframework.boot' : Spring Framework 기반의 자바 애플리케이션의 개발 및 실행을 지원하는 프레임워크
     id 'org.springframework.boot' version '3.1.1'
 
-    // Spring Boot 기반의 Gradle 프로젝트에서 의존성 버전을 관리하고 정의하는 플러그인
+    // 'io.spring.dependency-management' : Spring Boot 기반의 Gradle 프로젝트에서 의존성 버전을 관리하고 정의하는 플러그인
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
-// Gradle 빌드 스크립트에서 Maven Central Repository를 프로젝트의 의존성 해결을 위한 저장소로 사용
-repositories {
-    mavenCentral()
+// allprojects {} : Gradle 빌드 스크립트에서 모든 프로젝트에 공통으로 적용되는 설정을 지정
+allprojects {
+    // group : 모든 프로젝트의 고유한 식별자인 group을 지정
+    group = 'vocawik'
+
+    // version : 모든 프로젝트의 릴리스 또는 빌드 버전을 나타내는 version을 지정
+    version = '0.0.1-SNAPSHOT'
+
+    // sourceCompatibility : 모든 프로젝트의 소스 호환성을 Java 17로 설정
+    sourceCompatibility = '17'
+
+    // 모든 프로젝트의 Gradle 빌드 스크립트에서 Maven Central Repository를 프로젝트의 의존성 해결을 위한 저장소로 사용
+    repositories {
+        mavenCentral()
+    }
+}
+
+// 멀티모듈 프로젝트에서 bootJar 파일 생성 비활성화 & Jar 파일 생성화
+bootJar.enabled = false
+jar.enabled = true
+
+// subprojects {} : Gradle 빌드 스크립트에서 하위 프로젝트에 공통으로 적용되는 설정을 지정
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    // java-library : Java 소스 코드를 컴파일하고 라이브러리 파일 (JAR) 형태로 빌드하는 플러그인
+    apply plugin: 'java-library'
+
+    // 멀티모듈 프로젝트에서 bootJar 파일 생성 비활성화 & Jar 파일 생성화
+    bootJar.enabled = false
+    jar.enabled = true
+
+    // dependencies {} : Gradle 빌드 스크립트에서 프로젝트 의존성을 정의
+    // - implementation : 컴파일 및 런타임 의존성 선언
+    // - testImplementation : 테스트 코드를 작성하고 실행하기 위해 필요한 의존성 정의
+    // - api : 컴파일 및 런타임 시에, 그리고 프로젝트를 사용하는 다른 모듈에서 해당 의존성을 사용할 수 있도록 선언
+    // - compileOnly : 컴파일 시에만 필요한 의존성 정의
+    // - runtimeOnly : 런타임 시에만 필요한 의존성 정의
+    // - testCompileOnly : 테스트 코드 컴파일 시에만 필요한 의존성 정의
+    // - testRuntimeOnly : 테스트 실행 시에만 필요한 의존성 정의
+    // - annotationProcessor : 컴파일 시에 어노테이션 프로세서 활성화
+    // - testAnnotationProcessor : 테스트 코드 컴파일 시에 어노테이션 프로세서 활성화
+    dependencies {
+        // 'org.projectlombok:lombok' : Lombok 에노테이션을 사용해 소스 코드를 자동으로 생성
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+
+        // 'org.springframework.boot:spring-boot-starter-test' : Spring Boot 어플리케이션의 단위 테스트, 통합 테스트, 모의 객체 등을 지원
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        // 'org.junit.jupiter:junit-jupiter-api:5.8.1' : Java 프로그래밍 언어를 위한 단위 테스트 프레임워크
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    }
+
+    // configurations {} : Gradle 빌드 스크립트에서 의존성 구성을 정의
+    configurations {
+        compileOnly {
+            // - extendsFrom : 특정 구성이 다른 구성을 확장하도록 지정
+            extendsFrom annotationProcessor
+        }
+    }
+
+    // wrapper {} : Gradle 빌드 도구를 프로젝트에 내장시켜 빌드 환경의 일관성을 유지하는 Gradle Wrapper의 설정을 정의
+    wrapper {
+        // gradleVersion : 사용할 Gradle 버전을 지정
+        gradleVersion = '7.4'
+
+        // distributionUrl : Gradle 빌드 도구의 다운로드 위치를 지정 (기존 다운로드 URL에서 "bin"을 "all"로 변경하여 Gradle의 모든 버전을 다운로드)
+        distributionUrl = distributionUrl.replace("bin", "all")
+    }
+
+    // tasks.named : 특정 이름을 가진 task를 선택하고 해당 task에 대한 구성을 수행
+    tasks.named('test') {
+        // useJUnitPlatform : test task에 JUnit Platform을 사용하도록 지정
+        useJUnitPlatform()
+    }
+
+    // 'prepareKotlinBuildScriptModel'라는 이름의 empty task 등록
+    tasks.register('prepareKotlinBuildScriptModel'){}
 }
