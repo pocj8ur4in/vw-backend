@@ -101,4 +101,13 @@ subprojects {
 
     // 'prepareKotlinBuildScriptModel'라는 이름의 empty task 등록
     tasks.register('prepareKotlinBuildScriptModel'){}
+
+    // 'pre-commit'을 '.git/hooks' 디렉토리에 설치
+    task installGitHooks(type: Copy) {
+        from new File(rootProject.rootDir, 'pre-commit')
+        into { new File(rootProject.rootDir, '.git/hooks') }
+    }
+
+    // 'installGitHooks'을 'build' 작업의 의존성으로 설정
+    build.dependsOn installGitHooks
 }

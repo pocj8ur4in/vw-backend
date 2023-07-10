@@ -1,0 +1,14 @@
+# 스테이지에 올라간 파일 목록 가져오기
+stagedFiles=$(git diff --staged --name-only)
+
+# spotlessApply 실행
+./gradlew spotlessApply
+
+# 각 파일에 대해 주석 처리
+for file in $stagedFiles; do
+  # 파일인 경우에만 주석 처리
+  if test -f "$file"; then
+    # 파일을 스테이지에 추가
+    git add "$file"
+  fi
+done
