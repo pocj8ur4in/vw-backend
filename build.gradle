@@ -9,7 +9,13 @@ plugins {
 
     // 'io.spring.dependency-management' : Spring Boot 기반의 Gradle 프로젝트에서 의존성 버전을 관리하고 정의하는 플러그인
     id 'io.spring.dependency-management' version '1.1.0'
+
+    // 'com.diffplug.spotless' : 코드 파일의 포맷팅 규칙을 정의하고, 코드에 적용될 자동 포맷팅 작업을 설정
+    id 'com.diffplug.spotless' version '6.16.0'
 }
+
+// apply from : Gradle 빌드 스크립트에서 외부 스크립트 파일을 프로젝트에 적용
+apply from: "$rootDir/spotless.gradle"
 
 // allprojects {} : Gradle 빌드 스크립트에서 모든 프로젝트에 공통으로 적용되는 설정을 지정
 allprojects {
