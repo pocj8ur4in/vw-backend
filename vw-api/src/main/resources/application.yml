@@ -3,23 +3,26 @@ spring:
     include:
       - vw-domain
       - vw-core
+  jpa:
+    # SPRING.JPA.OPEN-IN-VIEW 로그 오류 해결
+    open-in-view: false
 
 ---
-# ?? (dev) ????
+# 개발 (dev) 프로파일
 spring:
   config:
     activate:
       on-profile: dev
 
 ---
-# ???? (staging) ????
+# 스테이징 (staging) 프로파일
 spring:
   config:
     activate:
       on-profile: staging
 
 ---
-# ?? (production) ????
+# 운영 (production) 프로파일
 spring:
   config:
     activate:
