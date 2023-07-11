@@ -12,10 +12,15 @@ plugins {
 
     // 'com.diffplug.spotless' : 코드 파일의 포맷팅 규칙을 정의하고, 코드에 적용될 자동 포맷팅 작업을 설정
     id 'com.diffplug.spotless' version '6.16.0'
+
+    // 'org.sonarqube' : 정적 코드 분석을 통해 버그, 취약점, 코드 스멜 등을 감지하고, 이를 바탕으로 한 보고서를 생성하여 소프트웨어의 품질을 관리
+    id 'org.sonarqube' version '4.0.0.2929'
 }
 
 // apply from : Gradle 빌드 스크립트에서 외부 스크립트 파일을 프로젝트에 적용
 apply from: "$rootDir/spotless.gradle"
+apply from: "$rootDir/sonarqube.gradle"
+
 
 // allprojects {} : Gradle 빌드 스크립트에서 모든 프로젝트에 공통으로 적용되는 설정을 지정
 allprojects {

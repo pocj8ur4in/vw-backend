@@ -1,0 +1,16 @@
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property 'sonar.projectKey', 'vw-backend' // 프로젝트를 식별하는 고유 키 설정
+        property 'sonar.projectName', 'vw-backend' // 프로젝트 이름 설정
+        property 'sonar.host.url', 'https://sonarcloud.io' // SonarQube 서버 URL 설정
+        property 'sonar.sources', 'src' // 코드 디렉토리 설정
+        property 'sonar.language', 'java' // 프로젝트 주요 언어 설정
+        property 'sonar.sourceEncoding', 'UTF-8' // 소스 코드 인코딩 설정
+        property 'sonar.test.inclusions', '**/*Test.java' // 테스트 파일 포함 설정
+        property 'sonar.exclusions', '**/test/**, **/Q*.java, **/*Doc*.java, **/resources/** ,**/*Application*.java , **/*Config*.java,' +
+                '**/*Dto*.java, **/*Request*.java, **/*Response*.java ,**/*Exception*.java ,**/*ErrorCode*.java' // 분석에서 제외할 파일 및 디렉토리 설정
+        property 'sonar.java.coveragePlugin', 'jacoco' // 코드 커버리지 플러그인 설정
+    }
+}
