@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    include:
+      - vw-core
+
+---
+# ?? (dev) ????
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+# ???? (staging) ????
+spring:
+  config:
+    activate:
+      on-profile: staging
+
+---
+# ?? (production) ????
+spring:
+  config:
+    activate:
+      on-profile: production
