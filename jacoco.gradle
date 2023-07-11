@@ -1,0 +1,47 @@
+jacoco {
+    toolVersion = '0.8.9' // Jacoco 도구 버전 설정
+}
+
+test {
+    finalizedBy jacocoTestReport // 테스트가 완료된 후에 jacocoTestReport 태스크 실행
+}
+
+jacocoTestReport {
+    dependsOn test // jacocoTestReport 태스크가 실행되기 전에 test 태스크 실행
+    reports {
+        html.enabled true // HTML 형식의 보고서 생성
+        csv.enabled true // CSV 형식의 보고서 생성
+        xml.enabled true // XML 형식의 보고서 생성
+    }
+
+    def Qdomains = []
+
+    for (qPattern in '*.QA'..'*.QZ') { // Q 패턴을 가진 도메인을 Qdomains에 추가
+        Qdomains.add(qPattern + '*')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect {
+                    fileTree(dir: it, excludes: [] + Qdomains) // Q 패턴을 가진 도메인을 제외한 classDirectories 설정
+                })
+        )
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification' // jacocoTestCoverageVerification 태스크가 실행된 후에 jacocoTestReport 태스크 실행
+}
+
+jacocoTestCoverageVerification {
+    def Qdomains = []
+
+    for (qPattern in '*.QA'..'*.QZ') { // Q 패턴을 가진 도메인을 Qdomains에 추가
+        Qdomains.add(qPattern + '*')
+    }
+
+    violationRules {
+        rule {
+            enabled = true
+            excludes = [] + Qdomains // Q 패턴을 가진 도메인을 제외하고 규칙을 적용
+        }
+    }
+}

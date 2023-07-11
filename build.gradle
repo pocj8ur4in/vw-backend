@@ -47,6 +47,11 @@ subprojects {
     // java-library : Java 소스 코드를 컴파일하고 라이브러리 파일 (JAR) 형태로 빌드하는 플러그인
     apply plugin: 'java-library'
 
+    // 'jacoco' : Java 코드의 코드 커버리지를 측정
+    apply plugin: 'jacoco'
+
+    apply from: "$rootDir/jacoco.gradle"
+
     // 멀티모듈 프로젝트에서 bootJar 파일 생성 비활성화 & Jar 파일 생성화
     bootJar.enabled = false
     jar.enabled = true
