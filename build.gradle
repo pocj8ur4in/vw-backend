@@ -57,10 +57,6 @@ subprojects {
 
     apply from: "$rootDir/jacoco.gradle"
 
-    // 멀티모듈 프로젝트에서 bootJar 파일 생성 비활성화 & Jar 파일 생성화
-    bootJar.enabled = false
-    jar.enabled = true
-
     // dependencies {} : Gradle 빌드 스크립트에서 프로젝트 의존성을 정의
     // - implementation : 컴파일 및 런타임 의존성 선언
     // - testImplementation : 테스트 코드를 작성하고 실행하기 위해 필요한 의존성 정의

@@ -1,0 +1,120 @@
+# Github Actions의 workflow 이름 정의
+name: CI&CD Pipeline
+
+# 이벤트 트리거 설정
+on:
+  push:
+    branches:
+      - master
+
+# 실행 환경 설정
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    strategy: # matrix : 동일한 workflow를 여러 가지 다른 환경에서 실행시킴
+      matrix:
+        java-version: [ 17 ]
+
+    steps:
+      # 레포지토리를 체크아웃하여 워크스페이스에 가져옴
+      - name: Check Out The Repository
+        uses: actions/checkout@v3
+
+      # Java 환경 설정
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'corretto'
+
+      # 버전 정보 추출
+      - name: Get the version
+        id: get_version
+        run: |
+          RELEASE_VERSION_WITHOUT_V="$(cut -d'v' -f2 <<< ${GITHUB_REF#refs/*/})"
+          echo ::set-output name=VERSION::$RELEASE_VERSION_WITHOUT_V
+
+      # Gradle 캐싱 설정
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # gradlew 스크립트에 실행 권한 부여
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+
+      # Spotless 코드 포매터를 실행해 코드 스타일 확인
+      - name: Check spotless
+        run: ./gradlew spotlessCheck
+
+      # Gradle로 vw-api 모듈 빌드
+      - name: Execute Gradle build
+        run: ./gradlew :vw-api:build --no-daemon
+
+      # Docker 빌드 툴인 Docker Buildx 설정
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Docker Hub에 로그인
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Docker 이미지 빌드 및 Docker Hub에 푸시
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./vw-api
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}
+
+      # 빌드된 Docker 이미지의 디제스트 값 출력
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+      # EC2 인스턴스 내에서 Docker 컨테이너를 실행하여 애플리케이션을 실행
+      - name: Application Run
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            # 이전에 실행 중인 도커 컨테이너 중지
+            sudo docker stop ${{ secrets.DOCKERHUB_NAME }}
+
+            # 이전에 실행 중인 도커 컨테이너 강제로 삭제
+            sudo docker rm -f ${{ secrets.DOCKERHUB_NAME }}
+
+            # 최신 도커 이미지를 Docker Hub에서 EC2 인스턴스로 가져옴
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}:latest
+
+            # 새로운 도커 컨테이너 실행
+            sudo docker run -p ${{ secrets.DOCKERHUB_PORT }}:8080 \
+              --name ${{ secrets.DOCKERHUB_NAME }} \
+              -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}
+
+            # 모든 미사용 도커 이미지를 삭제
+            sudo docker image prune -a -f
+      
+
+      # gradlew 스크립트의 권한 변경
+      - name: gradlew permission change
+        run: sudo chmod 755 gradlew
+
+      # Sonaqube 분석
+      - name: Sonaqube Analysis
+        run: ./gradlew test sonarqube
+          -Dsonar.host.url=${{ secrets.SONARQUBE_URL }}
+          -Dsonar.projectKey=${{ secrets.SONARQUBE_PROJECT_KEY }}
+          -Dsonar.projectName=${{ secrets.SONARQUBE_PROJECT_KEY }}-${{github.event.pull_request.number}}
+          -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
