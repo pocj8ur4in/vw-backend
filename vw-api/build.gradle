@@ -8,6 +8,9 @@ dependencies {
     // 'org.springdoc:springdoc-openapi-starter-webmvc-ui' : SpringDoc OpenAPI를 통해 자동으로 API 문서를 생성하여 Swagger UI를 통해 보여줌
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
+    // 'org.springframework.boot:spring-boot-starter-thymeleaf' : Java 기반 서버 사이드 렌더링 템플릿 엔진
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.1'
+
     implementation project(':vw-domain')
     implementation project(':vw-core')
 }
