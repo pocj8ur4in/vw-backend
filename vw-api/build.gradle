@@ -16,4 +16,5 @@ dependencies {
 
     implementation project(':vw-domain')
     implementation project(':vw-core')
+    implementation project(':vw-infra')
 }

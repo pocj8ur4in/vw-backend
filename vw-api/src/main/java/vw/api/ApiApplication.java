@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ApiApplication {
     public static void main(String[] args) {
         System.setProperty(
-                "spring.config.name", "application, application-domain, application-core");
+                "spring.config.name",
+                "application, application-domain, application-core, application-infra");
 
         SpringApplication.run(ApiApplication.class, args);
     }

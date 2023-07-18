@@ -3,6 +3,7 @@ spring:
     include:
       - vw-domain
       - vw-core
+      - vw-infra
   jpa:
     # SPRING.JPA.OPEN-IN-VIEW 로그 오류 해결
     open-in-view: false

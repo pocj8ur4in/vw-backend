@@ -2,7 +2,6 @@ spring:
   profiles:
     include:
       - vw-core
-      - vw-infra
 
 ---
 # 개발 (dev) 프로파일

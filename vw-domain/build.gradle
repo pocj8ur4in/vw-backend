@@ -9,4 +9,5 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     implementation project(':vw-core')
+    implementation project(':vw-infra')
 }
