@@ -6,13 +6,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import vw.domain.common.model.BaseDateTime;
 
 @Getter
 @Entity
 @Table(name = "tbl_user")
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User { // 회원 엔티티
+public class User extends BaseDateTime { // 회원 엔티티
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_index")
