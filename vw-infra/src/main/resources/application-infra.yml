@@ -3,6 +3,10 @@ spring:
     include:
       - vw-core
 
+logging:
+  level:
+    com.mangkyu.openfeign.app.openfeign: DEBUG # feign에 대한 로깅 수준을 DEBUG로 설정 (가장 상세한 로그를 출력)
+
 ---
 # 개발 (dev) 프로파일
 spring:

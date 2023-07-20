@@ -21,6 +21,10 @@ plugins {
 apply from: "$rootDir/spotless.gradle"
 apply from: "$rootDir/sonarqube.gradle"
 
+// ext {} : 빌드 스크립트에서 변수처럼 사용할 수 있는 확장 속성을 정의
+ext {
+    set('springCloudVersion', "2022.0.3")
+}
 
 // allprojects {} : Gradle 빌드 스크립트에서 모든 프로젝트에 공통으로 적용되는 설정을 지정
 allprojects {
@@ -80,6 +84,14 @@ subprojects {
         // 'org.junit.jupiter:junit-jupiter-api:5.8.1' : Java 프로그래밍 언어를 위한 단위 테스트 프레임워크
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    }
+
+    // dependencyManagement {} : 프로젝트의 의존성 관리를 중앙집중식으로 수행
+    dependencyManagement {
+        // imports {} : 외부 Maven Bom (Build of Materials)을 가져와 의존성 버전을 관리
+        imports { // "spring-cloud-dependencies" : Spring Cloud 프로젝트에서 제공하는 Maven BOM
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
     }
 
     // configurations {} : Gradle 빌드 스크립트에서 의존성 구성을 정의
