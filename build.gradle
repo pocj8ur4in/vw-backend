@@ -87,6 +87,9 @@ subprojects {
 
         // 'io.netty:netty-resolver-dns-native-macos' : MacOS M1를 위한 netty-resolver-dns 종속성 추가
         implementation 'io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64'
+
+        // 'org.springframework.boot:spring-boot-starter-validation' : 특정 유형의 데이터에 대한 유효성 검사 수행
+        implementation 'org.springframework.boot:spring-boot-starter-validation:2.2.6.RELEASE'
     }
 
     // dependencyManagement {} : 프로젝트의 의존성 관리를 중앙집중식으로 수행
