@@ -13,10 +13,10 @@ import vw.domain.common.vo.Image;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserProfile { // 회원 프로필
-    @Column(name = "user_nickname")
+    @Column(name = "user_nickname", unique = true, length = 8, nullable = false)
     private String nickname; // 회원 닉네임
 
-    @Column(name = "user_email")
+    @Column(name = "user_email", unique = true)
     private String email; // 회원 이메일
 
     @Embedded

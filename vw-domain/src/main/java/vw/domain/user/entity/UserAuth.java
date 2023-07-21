@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserAuth { // 회원 인증
-    @Column(name = "user_id")
+    @Column(name = "user_id", unique = true, length = 15)
     private String id; // 회원 아이디
 
-    @Column(name = "user_password")
+    @Column(name = "user_password", length = 30)
     private String password; // 회원 비밀번호
 
     @Builder

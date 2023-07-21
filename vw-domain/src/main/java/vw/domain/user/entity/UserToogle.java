@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserToogle { // 회원 토글
-    @Column(name = "user_receiveEmail")
+    @Column(name = "user_receiveEmail", nullable = false)
     private Boolean receiveEmail = Boolean.TRUE; // 회원 이메일 수신 여부
 
     @Builder

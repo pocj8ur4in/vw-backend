@@ -20,11 +20,11 @@ public class User extends BaseDateTime { // 회원 엔티티
     private int index; // 회원 식별자
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_userType")
+    @Column(name = "user_userType", nullable = false)
     private UserType userType = UserType.TYPE_NORMAL; // 회원 유형 정보
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_userState")
+    @Column(name = "user_userState", nullable = false)
     private UserState userState = UserState.STATE_NORMAL; // 회원 상태 정보
 
     @Embedded private UserAuth userAuth; // 회원 인증 정보
