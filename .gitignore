@@ -217,3 +217,20 @@ Temporary Items
 ### macOS Patch ###
 # iCloud generated files
 *.icloud
+
+### SonarQube ###
+# SonarQube ignore files.
+# https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+# Sonar Scanner working directories
+.sonar/
+.sonarqube/
+.scannerwork/
+
+# http://www.sonarlint.org/commandline/
+# SonarLint working directories, configuration files (including credentials)
+.sonarlint/
+
+### Redis ###
+# Ignore redis binary dump (dump.rdb) files
+
+*.rdb

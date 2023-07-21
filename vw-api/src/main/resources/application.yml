@@ -1,5 +1,6 @@
 spring:
   profiles:
+    active: local # 멀티모듈 프로필 기본값 설정 (java.lang.IllegalArgumentException at PropertyPlaceholderHelper 오류 해결)
     include:
       - vw-domain
       - vw-core
