@@ -1,0 +1,3 @@
+// 멀티모듈 프로젝트에서 bootJar 파일 생성 비활성화 & Jar 파일 생성화
+bootJar.enabled = false
+jar.enabled = true
