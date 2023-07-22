@@ -17,6 +17,9 @@ dependencies {
     // 'org.springframework.boot:spring-boot-starter-data-redis' : Redis에 필요한 모든 의존성들을 관리
     api 'org.springframework.boot:spring-boot-starter-data-redis'
 
+    // 'org.redisson:redisson' : redis의 데이터 구조를 자바 애플리케이션에서 사용하게끔 지원
+    api 'org.redisson:redisson:3.20.0'
+
     implementation project(':vw-core')
 
     // 멀티모듈 프로젝트에서 bootJar 파일 생성 비활성화 & Jar 파일 생성화
