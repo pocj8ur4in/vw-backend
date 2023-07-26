@@ -30,4 +30,12 @@ public class UserProfile { // 회원 프로필
         this.email = email;
         this.image = Image.valueOf(image);
     }
+
+    public void setNickname(String nickname) { // 닉네임 재설정
+        this.nickname = nickname;
+    }
+
+    public void setEmail(String email) { // 이메일 재설정
+        this.email = email;
+    }
 }

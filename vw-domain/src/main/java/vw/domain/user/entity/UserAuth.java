@@ -22,4 +22,8 @@ public class UserAuth { // 회원 인증
         this.id = id;
         this.password = password;
     }
+
+    public void setPassword(String password) { // 비밀번호 재설정
+        this.password = password;
+    }
 }

@@ -18,4 +18,8 @@ public class UserToogle { // 회원 토글
     public UserToogle(Boolean receiveEmail) { // Builder 패턴으로 UserToogle 객체를 생성 가능하게 함
         this.receiveEmail = receiveEmail;
     }
+
+    public void setReceiveEmail(Boolean receiveEmail) { // 이메일 수신 여부 재설정
+        this.receiveEmail = receiveEmail;
+    }
 }
