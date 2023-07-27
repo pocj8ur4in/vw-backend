@@ -14,10 +14,11 @@ import vw.domain.user.entity.UserProfile;
 import vw.domain.user.entity.UserToogle;
 import vw.domain.user.exception.UserNotFoundException;
 
-@DataJpaTest
+@DataJpaTest // 테스트용 데이터베이스를 설정하고, JPA 리포지토리를 테스트하기 위해 필요한 컴포넌트들을 구성
 public class UserRepositoryTest {
     @Autowired UserRepository userRepository;
 
+    // EntityManager : 영속성 컨텍스트를 생성하고 관리. 엔티티의 CRUD 작업 수행
     @PersistenceContext EntityManager entityManager;
 
     @Test
@@ -35,6 +36,7 @@ public class UserRepositoryTest {
                         .findUserByUserAuth_Id(givenUser.getUserAuth().getId())
                         .orElseThrow(UserNotFoundException::new);
 
+        // assertThat : 주어진 값이 기대한 값과 일치하는지 확인
         assertThat(thenUser.getUserAuth().getPassword())
                 .isEqualTo(givenUser.getUserAuth().getPassword());
     }
@@ -75,6 +77,7 @@ public class UserRepositoryTest {
         userRepository.delete(givenUser);
 
         // then
+        // assertThatThrownBy :  특정 코드 블록이 예상한 예외를 던지는지 확인
         assertThatThrownBy(
                         () ->
                                 userRepository
@@ -118,8 +121,8 @@ public class UserRepositoryTest {
     }
 
     private void clear() {
-        entityManager.flush();
-        entityManager.clear();
+        entityManager.flush(); // 쿼리를 즉시 수행
+        entityManager.clear(); // 캐시를 비움
     }
 
     private User createUser() {
