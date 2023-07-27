@@ -90,6 +90,18 @@ subprojects {
 
         // 'org.springframework.boot:spring-boot-starter-validation' : 특정 유형의 데이터에 대한 유효성 검사 수행
         implementation 'org.springframework.boot:spring-boot-starter-validation:2.2.6.RELEASE'
+
+        // 'io.jsonwebtoken:jjwt-api' : JWT를 생성 (JwtBuilder) 및 파싱 (Claims)
+        implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+
+        // 'io.jsonwebtoken:jjwt-impl' : jjwt-api의 구현체
+        runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+
+        // 'io.jsonwebtoken:jjwt-jackson' : JWT 토큰을 JSON 형식으로 serialize 및 deserialize
+        runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+        // 'org.springframework.boot:spring-boot-configuration-processor' : 어플리케이션에서 설정 클래스를 처리하고 관련된 메타 데이터 생성
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     }
 
     // dependencyManagement {} : 프로젝트의 의존성 관리를 중앙집중식으로 수행
