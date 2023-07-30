@@ -1,4 +1,4 @@
-package vw.core.dto;
+package vw.core.dto.error;
 
 import lombok.Builder;
 import lombok.Getter;

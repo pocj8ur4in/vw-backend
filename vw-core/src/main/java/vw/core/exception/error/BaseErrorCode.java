@@ -1,6 +1,6 @@
-package vw.core.exception;
+package vw.core.exception.error;
 
-import vw.core.dto.BaseErrorReason;
+import vw.core.dto.error.BaseErrorReason;
 
 public interface BaseErrorCode {
     public BaseErrorReason getErrorReason(); // 에러의 원인을 반환

@@ -1,4 +1,4 @@
-package vw.core.exception;
+package vw.core.exception.error;
 
 import static vw.core.statics.BaseStatic.UNAUTHORIZED;
 
@@ -7,7 +7,7 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import vw.core.annotation.ExplainError;
-import vw.core.dto.BaseErrorReason;
+import vw.core.dto.error.BaseErrorReason;
 
 @Getter
 @AllArgsConstructor

@@ -12,7 +12,7 @@ import java.security.Key;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import vw.core.dto.AccessTokenInfo;
+import vw.core.dto.jwt.AccessTokenInfo;
 import vw.core.exception.jwt.ExpiredTokenException;
 import vw.core.exception.jwt.InvalidTokenException;
 import vw.core.properties.JwtProperties;

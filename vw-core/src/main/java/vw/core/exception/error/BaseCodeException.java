@@ -1,8 +1,8 @@
-package vw.core.exception;
+package vw.core.exception.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import vw.core.dto.BaseErrorReason;
+import vw.core.dto.error.BaseErrorReason;
 
 @Getter
 @AllArgsConstructor
