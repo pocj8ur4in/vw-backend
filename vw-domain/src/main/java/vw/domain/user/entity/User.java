@@ -17,7 +17,7 @@ public class User extends BaseDateTime { // 회원 엔티티
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_index")
-    private int index; // 회원 식별자
+    private long index; // 회원 식별자
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_userType", nullable = false)

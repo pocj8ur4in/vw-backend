@@ -26,7 +26,9 @@ public enum UserErrorCode implements BaseErrorCode {
     @ExplainError("닉네임이 이미 존재하는 경우")
     ALREADY_EXIST_NICKNAME(BAD_REQUEST, "USER_400_5", "해당 닉네임이 이미 존재합니다."),
     @ExplainError("사용자의 회원가입이 실패한 경우")
-    USER_NOT_REGISTERED(INTERNAL_SERVER, "USER_500_1", "회원가입이 실패하였습니다");
+    REGISTER_FAILURE(INTERNAL_SERVER, "USER_500_1", "회원가입이 실패하였습니다"),
+    @ExplainError("사용자의 로그인이 실패한 경우")
+    LOGIN_FAILURE(FORBIDDEN, "USER_403_1", "로그인이 실패하였습니다.");
 
     private Integer status; // HTTP 상태 코드
     private String code; // HTTP 상태 코드 (문자열)
