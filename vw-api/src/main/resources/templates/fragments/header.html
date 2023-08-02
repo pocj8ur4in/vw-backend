@@ -4,15 +4,15 @@
     <header class="p-3 mb-3 border-bottom">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li class="mx-1"><a href="#" class="nav-link px-2 link-body-emphasis">음성 합성 엔진</a></li>
-                    <li class="mx-1"><a href="#" class="nav-link px-2 link-body-emphasis">아티스트</a></li>
-                    <li class="mx-1"><a href="#" class="nav-link px-2 link-body-emphasis">노래</a></li>
+                <a th:href="@{/}" class="m-1">
+                    <img src="https://cdn.pixabay.com/photo/2017/02/27/20/48/headphones-2104207_960_720.png"
+                         width="48" height="48" class="rounded-circle">
+                </a>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 m-1">
+                    <li class="mx-1"><a th:href="@{/search/song}" class="nav-link px-2 link-body-emphasis m-1">노래</a></li>
+                    <li class="mx-1"><a th:href="@{/search/artist}" class="nav-link px-2 link-body-emphasis m-1">아티스트</a></li>
+                    <li class="mx-1"><a th:href="@{/search/vocalist}" class="nav-link px-2 link-body-emphasis m-1">가수</a></li>
                 </ul>
-
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control" placeholder="검색..." aria-label="Search">
-                </form>
 
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"

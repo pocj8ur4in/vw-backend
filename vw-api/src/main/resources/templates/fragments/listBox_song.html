@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="listBoxFragment">
+    <div class="row row-cols-md-5 g-3">
+        <div th:insert="~{fragments/listBoxContent_song :: listBoxContentFragment}"></div>
+        <div th:insert="~{fragments/listBoxContent_song :: listBoxContentFragment}"></div>
+        <div th:insert="~{fragments/listBoxContent_song :: listBoxContentFragment}"></div>
+        <div th:insert="~{fragments/listBoxContent_song :: listBoxContentFragment}"></div>
+        <div th:insert="~{fragments/listBoxContent_song :: listBoxContentFragment}"></div>
+    </div>
+</div>
+</html>
