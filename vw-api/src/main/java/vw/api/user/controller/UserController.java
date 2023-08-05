@@ -20,14 +20,14 @@ public class UserController {
 
     // 로그인 페이지 이동
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGET() {
+    public String userLoginGET() {
         logger.info("로그인 페이지 이동");
         return "user/login";
     }
 
     // 회원가입 페이지 이동
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerGET() {
+    public String userRegisterGET() {
         logger.info("회원가입 페이지 이동");
         return "user/register";
     }

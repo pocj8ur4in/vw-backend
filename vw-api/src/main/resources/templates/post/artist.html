@@ -1,5 +1,8 @@
-<!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-bs-theme="auto">
+<!DOCTYPE html>
+<!-- HTML 시작 부분 정의 (언어 설정, thymeleaf 적용, 부트스트랩의 테마를 자동으로 선택하도록 적용, 스프링 시큐리티 적용) -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-bs-theme="auto"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,22 +19,24 @@
 <div th:insert="~{fragments/darkmodToggle :: darkmodToogleFragment}"></div>
 <div th:insert="~{fragments/header :: headerFragment}"></div>
 
-<main class="container">
-  <div class="row g-5">
-    <table class="table text-center col-10">
-      <thead class="align-middle">
-      <tr>
-        <th class="col-2">아티스트 이름</th>
-        <td>{아티스트 이름}</td>
-      </tr>
-      </thead>
-      <tbody class="align-middle">
-      <tr>
-        <th>아티스트 항목</th>
-        <td>{아티스트 항목}</td>
-      </tr>
-      </tbody>
-    </table>
+<main class="container d-flex justify-content-center">
+  <div class="row g-5 col-8">
+    <div class="col-12">
+      <table class="table text-center">
+        <thead class="align-middle">
+        <tr>
+          <th class="col-2">이름</th>
+          <td>아티스트 이름 1<br>아티스트 이름 2, 아티스트 이름 3, ...</td>
+        </tr>
+        </thead>
+        <tbody class="align-middle">
+        <tr>
+          <th>링크</th>
+          <td>NND, YT, BB, Twitter...
+          </td>
+        </tbody>
+      </table>
+    </div>
   </div>
 </main>
 

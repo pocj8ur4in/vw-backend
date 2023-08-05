@@ -21,21 +21,21 @@ public class PostController {
 
     // 가수 포스트 이동
     @RequestMapping(value = "/vocalist", method = RequestMethod.GET)
-    public String vocalistGET() {
+    public String postVocalistGET() {
         logger.info("가수 포스트 이동");
         return "post/vocalist";
     }
 
     // 아티스트 포스트 이동
     @RequestMapping(value = "/artist", method = RequestMethod.GET)
-    public String artistGET() {
+    public String postArtistGET() {
         logger.info("아티스트 포스트 이동");
         return "post/artist";
     }
 
     // 노래 포스트 이동
     @RequestMapping(value = "/song", method = RequestMethod.GET)
-    public String songGET() {
+    public String postSongGET() {
         logger.info("노래 포스트 이동");
         return "post/song";
     }

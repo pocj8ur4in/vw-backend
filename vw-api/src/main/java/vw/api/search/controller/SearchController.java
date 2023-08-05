@@ -21,21 +21,21 @@ public class SearchController {
 
     // 가수 검색 이동
     @RequestMapping(value = "/vocalist", method = RequestMethod.GET)
-    public String vocalistGET() {
+    public String searchVocalistGET() {
         logger.info("가수 검색 이동");
         return "search/vocalist";
     }
 
     // 아티스트 검색 이동
     @RequestMapping(value = "/artist", method = RequestMethod.GET)
-    public String artistGET() {
+    public String searchArtistGET() {
         logger.info("아티스트 검색 이동");
         return "search/artist";
     }
 
     // 노래 검색 이동
     @RequestMapping(value = "/song", method = RequestMethod.GET)
-    public String songGET() {
+    public String searchSongGET() {
         logger.info("노래 검색 이동");
         return "search/song";
     }

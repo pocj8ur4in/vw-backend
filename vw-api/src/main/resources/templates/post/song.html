@@ -1,5 +1,8 @@
-<!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-bs-theme="auto">
+<!DOCTYPE html>
+<!-- HTML 시작 부분 정의 (언어 설정, thymeleaf 적용, 부트스트랩의 테마를 자동으로 선택하도록 적용, 스프링 시큐리티 적용) -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" data-bs-theme="auto"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,22 +19,63 @@
 <div th:insert="~{fragments/darkmodToggle :: darkmodToogleFragment}"></div>
 <div th:insert="~{fragments/header :: headerFragment}"></div>
 
-<main class="container">
-    <div class="row g-5">
-        <table class="table text-center col-10">
-            <thead class="align-middle">
-            <tr>
-                <th class="col-2">노래 이름</th>
-                <td>{노래 이름}</td>
-            </tr>
-            </thead>
-            <tbody class="align-middle">
-            <tr>
-                <th>노래 항목</th>
-                <td>{노래 항목}</td>
-            </tr>
-            </tbody>
-        </table>
+<main class="container d-flex justify-content-center">
+    <div class="row g-5 col-8">
+        <div class="col-12">
+            <table class="table text-center">
+                <thead class="align-middle">
+                <tr>
+                    <th class="col-2">이름</th>
+                    <td>노래 이름 1<br>노래 이름 2, 노래 이름 3, ...</td>
+                </tr>
+                </thead>
+                <tbody class="align-middle">
+                <tr>
+                    <th>가수</th>
+                    <td>가수 1, 가수 2 (가수 3)</td>
+                </tr>
+                <tr>
+                    <th>아티스트</th>
+                    <td>아티스트 1 (아티스트 유형)<br>
+                        아티스트 2 (아티스트 유형)<br>
+                        아티스트 3 (아티스트 유형)
+                    </td>
+                </tr>
+                <tr>
+                    <th>링크</th>
+                    <td>(NND) 링크<br>
+                        (YT) 링크<br>
+                        (BB) 링크<br>
+                    </td>
+                </tr>
+                <tr>
+                    <th>달성 기록</th>
+                    <td>주간 VOCAL Character 랭킹 순위 (이전 내용 모두 통합)<br>
+                        NND VOCALOID 전당/전설/신화입성<br>
+                        YT 10만/100만/1000만/1억 재생<br>
+                        BB 10만/100만/1000만 재생<br>
+                        NND VOCALOID SONGS TOP20 주간/월간/연간 랭킹 순위<br>
+                    </td>
+                </tr>
+                <tr>
+                    <th>유형</th>
+                    <td>노래 유형</td>
+                </tr>
+                <tr>
+                    <th>상위/하위 항목</th>
+                    <td>상위:오리지널 곡, 하위:커버 곡 리스트</td>
+                </tr>
+                <tr>
+                    <th>길이</th>
+                    <td>XX:XX</td>
+                </tr>
+                <tr>
+                    <th>투고일</th>
+                    <td>XXXX년 XX월 XX일 (UTC+9 기준)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 

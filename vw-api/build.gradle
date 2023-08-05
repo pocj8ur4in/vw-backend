@@ -11,6 +11,9 @@ dependencies {
     // 'org.springframework.boot:spring-boot-starter-thymeleaf' : Java 기반 서버 사이드 렌더링 템플릿 엔진
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.1'
 
+    // 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' : thymeleaf와 Spring Security를 통합
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
     // 'org.springframework.boot:spring-boot-starter-security' : 사용자 인증 및 권한 부여를 처리하여 보안 설정의 커스텀마이징을 가능하게 함
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
