@@ -6,50 +6,57 @@
   <div class="w-100 m-auto mt-5 mb-5">
     <h1 class="fw-normal text-center h3 mb-2">회원가입</h1>
 
-    <form class="needs-validation mt-5 mb-3" novalidate="">
+    <form action="" class="needs-validation mt-5 mb-3" novalidate=""
+          th:action="@{/user/register}" method="post">
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
           <label for="id" class="form-label">아이디 <span class="text-body-secondary">(필수)</span></label>
-          <div class="input-group has-validation">
-            <input type="text" class="form-control" id="id" required="">
-            <div class="invalid-feedback">아이디를 입력해주세요.</div>
+          <div class="input-group has-validation mb-1">
+            <input type="text" class="form-control" id="id" onblur="validateRegisterId(this.value)" required>
           </div>
+          <div class="error-message" id="id-error-message"></div>
         </div>
       </div>
 
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
           <label for="password" class="form-label">비밀번호 <span class="text-body-secondary">(필수)</span></label>
-          <input type="password" class="form-control" id="password">
-          <div class="invalid-feedback">비밀번호를 입력해주세요.</div>
-
+          <input type="password" class="form-control mb-1" id="password" onblur="validateRegisterPassword(this.value)" required="">
+          <div class="error-message" id="password-error-message"></div>
         </div>
       </div>
 
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
           <label for="passwordChk" class="form-label">비밀번호 확인 <span class="text-body-secondary">(필수)</span></label>
-          <input type="password" class="form-control" id="passwordChk">
-          <div class="invalid-feedback">비밀번호 확인을 입력해주세요.</div>
+          <input type="password" class="form-control mb-1" id="passwordChk"
+                 onblur="validateRegisterPasswordChk(this.value, document.getElementById('password').value)" required="">
+          <div class="error-message" id="passwordChk-error-message"></div>
         </div>
       </div>
 
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
           <label for="nickname" class="form-label">닉네임 <span class="text-body-secondary">(필수)</span></label>
-          <div class="input-group has-validation">
-            <input type="text" class="form-control" id="nickname" required>
-            <div class="invalid-feedback">닉네임을 입력해주세요.</div>
+          <div class="input-group has-validation mb-1">
+            <input type="text" class="form-control" id="nickname"
+                   onblur="validateRegisterNickname(this.value)" required="">
           </div>
+          <div class="error-message" id="nickname-error-message"></div>
         </div>
       </div>
-
 
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
           <label for="email" class="form-label">이메일 <span class="text-body-secondary">(필수)</span></label>
-          <input type="email" class="form-control" id="email">
-          <div class="invalid-feedback">이메일을 입력해주세요.</div>
+          <input type="email" class="form-control mb-1" id="email"
+                 onblur="validateRegisterEmail(this.value)" required="">
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary mb-1"
+                    onclick="sendEmailVerification(document.getElementById('email').value)">
+              이메일 인증</button>
+          </div>
+          <div class="error-message" id="email-error-message"></div>
         </div>
       </div>
 

@@ -1,6 +1,8 @@
 package vw.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import vw.core.dto.user.*;
@@ -21,15 +23,21 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     private JwtHandler jwtHandler;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(UserService.class); // SLF4J를 활용한 로그 기록
+
     public void validateId(ValidateIdRequest req) { // 아이디 검증
+        logger.info("아이디 검증");
         validateId(req.getId());
     }
 
     public void validateNickname(ValidateNicknameRequest req) { // 닉네임 검증
+        logger.info("닉네임 검증");
         validateNickname(req.getNickname());
     }
 
     public void validateEmail(ValidateEmailRequest req) { // 이메일 검증
+        logger.info("이메일 검증");
         validateEmail(req.getEmail());
     }
 
@@ -43,6 +51,7 @@ public class UserService {
     */
 
     public void register(RegisterRequest req) { // 일반 회원가입
+        logger.info("일반 회원가입");
         validateId(req.getId()); // 아이디 검증
         validateNickname(req.getNickname()); // 닉네임 검증
         validateEmail(req.getEmail()); // 이메일 검증
@@ -71,6 +80,7 @@ public class UserService {
     }
 
     public LoginResponse login(LoginRequest req) { // 일반 로그인
+        logger.info("일반 로그인");
         if (!userRepository.existsUserByUserAuth_Id(req.getId())) // 입력받은 아이디가 존재하지 않는 경우
         throw LoginFailureException.baseCodeException;
 
@@ -85,14 +95,13 @@ public class UserService {
             throw LoginFailureException.baseCodeException;
         }
 
+        // AccessToken, refreshToken 생성
         String accessToken =
                 jwtHandler.generateAccessToken(user.getIndex(), user.getUserType().getValue());
         String refreshToken = jwtHandler.generateRefreshToken(user.getIndex());
 
-        return LoginResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build(); // AccessToken, refreshToken 반환
+        // AccessToken, refreshToken 반환
+        return LoginResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
     }
 
     /*
@@ -114,15 +123,12 @@ public class UserService {
     */
 
     private void validateId(String Id) { // 아이디 검증
-        if (Id.length() > 15) throw TooLongIdException.baseCodeException; // 아이디 길이가 너무 긴 경우
-        else if (!userRepository.existsUserByUserAuth_Id(Id))
+        if (!userRepository.existsUserByUserAuth_Id(Id))
             throw AlreadyExistIdException.baseCodeException; // 이미 아이디가 존재하는 경우
     }
 
     private void validateNickname(String nickname) { // 닉네임 검증
-        if (nickname.length() > 8)
-            throw TooLongNicknameException.baseCodeException; // 닉네임 길이가 너무 긴 경우
-        else if (!userRepository.existsUserByUserAuth_Id(nickname))
+        if (!userRepository.existsUserByUserAuth_Id(nickname))
             throw AlreadyExistNicknameException.baseCodeException; // 이미 닉네임이 존재하는 경우
     }
 

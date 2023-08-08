@@ -14,7 +14,8 @@ import org.springframework.web.filter.ForwardedHeaderFilter;
 @RequiredArgsConstructor
 @SpringBootApplication( // '@SpringBootApplication' : 스프링 부트 애플리케이션의 주요 구성 요소들을 자동으로 설정
         scanBasePackages = { // 'scanBasePackages={}' : Spring이 Component Scan을 수행할 패키지들을 지정
-            "vw.api"
+            "vw.api",
+            "vw.domain"
         })
 @Slf4j
 public class ApiApplication

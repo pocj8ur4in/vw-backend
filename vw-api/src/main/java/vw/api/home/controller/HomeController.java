@@ -6,8 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import vw.api.user.controller.UserController;
 
 @Controller
@@ -19,7 +18,7 @@ public class HomeController {
             LoggerFactory.getLogger(UserController.class); // SLF4J를 활용한 로그 기록
 
     // 홈 페이지 이동
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String homeGET() {
         logger.info("홈 페이지 이동");
         return "home";
