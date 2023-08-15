@@ -16,16 +16,14 @@
   <script th:src="@{../static/js/register.js}"></script>
   <script th:src="@{../static/js/color-modes.js}"></script>
   <script th:src="@{../static/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
 
   <!-- 웹 페이지의 제목 지정 -->
-  <title>vocawik::회원가입</title>
+  <title>회원가입</title>
 </head>
 
 <!-- 웹 문서의 모양 선언 -->
 <body>
-
-<!-- 모든 페이지에 추가될 요소 -->
-<div th:insert="~{fragments/header :: headerFragment}"></div>
 
 <main>
   <!-- 회원가입 박스 -->
@@ -33,7 +31,6 @@
 </main>
 
 <!-- 모든 페이지에 추가될 요소 -->
-<div th:insert="~{fragments/footer :: footerFragment}"></div>
 <div th:insert="~{fragments/darkmodToggle :: darkmodToogleFragment}"></div>
 </body>
 

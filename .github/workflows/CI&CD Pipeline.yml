@@ -1,19 +1,17 @@
-# Github Actions의 workflow 이름 정의
-name: CI&CD Pipeline
+name: CI&CD Pipeline # Github Actions의 workflow 이름 정의
 
-# 이벤트 트리거 설정
 on:
   push:
     branches:
-      - master
+      - master # 이벤트 트리거 설정 : master에 푸시할 때 동작
 
 # 실행 환경 설정
 jobs:
   push:
     runs-on: ubuntu-latest
-    strategy: # matrix : 동일한 workflow를 여러 가지 다른 환경에서 실행시킴
+    strategy:
       matrix:
-        java-version: [ 17 ]
+        java-version: [ 17 ] # 동일한 workflow를 여러 가지 다른 환경에서 실행시킴
 
     steps:
       # 레포지토리를 체크아웃하여 워크스페이스에 가져옴
@@ -105,9 +103,8 @@ jobs:
 
             # 모든 미사용 도커 이미지를 삭제
             sudo docker image prune -a -f
-      
 
-      # gradlew 스크립트의 권한 변경
+      # gradlew 스크립트 권한 변경
       - name: gradlew permission change
         run: sudo chmod 755 gradlew
 

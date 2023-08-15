@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserToogle { // 회원 토글
-    @Column(name = "user_receiveEmail", nullable = false)
-    private Boolean receiveEmail = Boolean.TRUE; // 회원 이메일 수신 여부
+	@Column(name = "user_receive_email", nullable = false)
+	private Boolean receiveEmail = Boolean.TRUE; // 회원 이메일 수신 여부
 
-    @Builder
-    public UserToogle(Boolean receiveEmail) { // Builder 패턴으로 UserToogle 객체를 생성 가능하게 함
-        this.receiveEmail = receiveEmail;
-    }
+	@Builder
+	public UserToogle(Boolean receiveEmail) { // Builder 패턴으로 UserToogle 객체를 생성 가능하게 함
+		this.receiveEmail = receiveEmail;
+	}
 
-    public void setReceiveEmail(Boolean receiveEmail) { // 이메일 수신 여부 재설정
-        this.receiveEmail = receiveEmail;
-    }
+	public void setReceiveEmail(Boolean receiveEmail) { // 이메일 수신 여부 재설정
+		this.receiveEmail = receiveEmail;
+	}
 }

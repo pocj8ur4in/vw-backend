@@ -1,26 +1,32 @@
 spring:
-  profiles:
-    include:
+  profiles: # 프로파일 설정
+    include: # 다른 멀티 모듈 내의 프로파일 포함하도록 지정
       - vw-core
       - vw-infra
+  datasource: # 데이터 소스 관련 설정
+    driver-class-name: com.mysql.cj.jdbc.Driver # JDBC 드라이버 클래스 지정 : MySQL
 
----
-# 개발 (dev) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: dev
+    # MySQL DB에 접속하기 위한 JDBC 연결 문자열 : RDS_...는 Java 환경 변수 (Github Actions로 설정해 실행)
+    # useSSL=false : SSL 보안 연결 사용하지 않음 / characterEncoding=UTF-8 : 문자 인코딩을 UTF-8 / serverTimezone=Asia/Seoul : 서버 타임 존을 아시아/서울로 / allowPublicKeyRetrieval=true : 암호화된 연결 시 공개 키 공개
+    url: jdbc:mysql://${RDS_ENDPOINT}:${RDS_PORT}/${RDS_DB_NAME}?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+  jpa:
+    show-sql: ${JPA_SHOW_SQL:true} # prod/dev에서의 어플리케이션에서 SQL 쿼리 로깅 설정
+    properties:
+      hibernate: # JPA 프로퍼티 중 hibernate 관련 설정
+        format_sql: ${JPA_FORMAT_SQL:true} # prod/dev에서의 SQL 쿼리 포맷팅
 
----
-# 스테이징 (staging) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: staging
-
----
-# 운영 (production) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: production
+        # 배치 페치 설정 : 지연 로딩 성능 최적화 (default_batch_fetch_size 개수만큼 IN 쿼리로 조회 -> 1+N → 1+1로 최적화)
+        # N+1 문제를 해결하기 위해 컬렉션을 페치 조인하면 일대다 조인이 발생 -> N을 기준으로 row 생성하고, hibernate는 모든 DB 데이터를 읽어서 메모리에서 페이징 시도 -> memory leak 발생
+        default_batch_fetch_size: ${JPA_BATCH_FETCH_SIZE:100}
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:none} # dev에서 어플리케이션을 시작할 때마다 데이터베이스 스키마를 자동으로 생성 및 갱신하도록
+    defer-datasource-initialization: ${JPA_DETER_DATASOURCE_INITIALIZATION:true} # dev에서 데이터소스 초기화 지연 : 스프링부트 초기 데이터 설정 위한 DDL (schema.sql), DML (data.sql) 적용할 수 있게
+  sql:
+    init:
+      mode: ${SQL_INIT_MODE:always} # dev에서 스크립트 기반의 초기화 : 스프링부트 초기 데이터 설정 위한 DDL (schema.sql), DML (data.sql) 적용
+logging:
+  level:
+    org.springframework.orm.jpa: ${LOGGING_LEVEL:DEBUG} # JPA에 대한 로깅 수준 설정
+    org.springframework.transaction: ${LOGGING_LEVEL:DEBUG} # 트랜잭션에 대한 로깅 수준 설정

@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "auth.jwt") // prefix로 시작하는 properties 정보를 바인딩
 public class JwtProperties {
-    private String secretKey; // 시크릿 키
-    private Long accessExp; // 만료 시간
-    private Long refreshExp; // 갱신 시간
+	private String secretKey; // 시크릿 키
+	private Long accessExp; // 만료 시간
+	private Long refreshExp; // 갱신 시간
 }

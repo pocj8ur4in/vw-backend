@@ -4,9 +4,7 @@ dependencies {
 
     // 'com.mysql:mysql-connector-j' : MySQL 데이터베이스와의 연동을 위한 MySQL JDBC 드라이버
     api 'com.mysql:mysql-connector-j'
-
-    // 'com.h2database:h2' : H2 데이터베이스
-    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
     implementation project(':vw-core')
     implementation project(':vw-infra')

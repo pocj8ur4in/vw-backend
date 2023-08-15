@@ -10,6 +10,6 @@ import vw.domain.DomainPackageLocation;
 @EnableJpaAuditing
 @EntityScan(basePackageClasses = DomainPackageLocation.class) // // Entity 스캔을 위한 기본 패키지 위치를 설정
 @EnableJpaRepositories(
-        basePackageClasses = DomainPackageLocation.class) // JPA 저장소를 활성화하기 위한 기본 패키지 위치를 설정
+		basePackageClasses = DomainPackageLocation.class) // JPA 저장소를 활성화하기 위한 기본 패키지 위치를 설정
 public class JpaConfig { // JPA Auditing 활성화
 }

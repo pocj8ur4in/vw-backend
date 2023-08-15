@@ -1,31 +1,8 @@
 spring:
-  profiles:
-    active: local # 멀티모듈 프로필 기본값 설정 (java.lang.IllegalArgumentException at PropertyPlaceholderHelper 오류 해결)
-    include:
+  profiles: # 프로파일 설정
+    include: # 다른 멀티 모듈 내의 프로파일 포함하도록 지정
       - vw-domain
       - vw-core
       - vw-infra
   jpa:
-    # SPRING.JPA.OPEN-IN-VIEW 로그 오류 해결
-    open-in-view: false
-
----
-# 개발 (dev) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: dev
-
----
-# 스테이징 (staging) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: staging
-
----
-# 운영 (production) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: production
+    open-in-view: false # SPRING.JPA.OPEN-IN-VIEW 로그 오류 해결

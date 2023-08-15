@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Documented
 @Component
 public @interface Adaptor {
-    @AliasFor(annotation = Component.class)
-    String value() default "";
+	@AliasFor(annotation = Component.class)
+	String value() default "";
 }

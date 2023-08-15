@@ -4,15 +4,19 @@
 
 <div th:fragment="registerBoxFragment">
   <div class="w-100 m-auto mt-5 mb-5">
-    <h1 class="fw-normal text-center h3 mb-2">회원가입</h1>
+    <a th:href="@{/}" class="d-flex justify-content-center mb-3">
+      <img src="https://cdn.pixabay.com/photo/2017/02/27/20/48/headphones-2104207_960_720.png"
+           width="48" height="48" class="rounded-circle">
+    </a>
 
-    <form action="" class="needs-validation mt-5 mb-3" novalidate=""
-          th:action="@{/user/register}" method="post">
+    <h1 class="fw-normal text-center h3 mb-1">회원가입</h1>
+
+    <form action="" class="needs-validation mt-5 mb-3" novalidate="">
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
           <label for="id" class="form-label">아이디 <span class="text-body-secondary">(필수)</span></label>
           <div class="input-group has-validation mb-1">
-            <input type="text" class="form-control" id="id" onblur="validateRegisterId(this.value)" required>
+            <input type="text" class="form-control" id="id" onblur="validateRegisterId()" required>
           </div>
           <div class="error-message" id="id-error-message"></div>
         </div>
@@ -20,17 +24,17 @@
 
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
-          <label for="password" class="form-label">비밀번호 <span class="text-body-secondary">(필수)</span></label>
-          <input type="password" class="form-control mb-1" id="password" onblur="validateRegisterPassword(this.value)" required="">
+          <label for="password1" class="form-label">비밀번호 <span class="text-body-secondary">(필수)</span></label>
+          <input type="password" class="form-control mb-1" id="password1" onblur="validateRegisterPassword()" required="">
           <div class="error-message" id="password-error-message"></div>
         </div>
       </div>
 
       <div class="d-flex justify-content-center mb-3">
         <div class="col-md-6">
-          <label for="passwordChk" class="form-label">비밀번호 확인 <span class="text-body-secondary">(필수)</span></label>
-          <input type="password" class="form-control mb-1" id="passwordChk"
-                 onblur="validateRegisterPasswordChk(this.value, document.getElementById('password').value)" required="">
+          <label for="password2" class="form-label">비밀번호 확인 <span class="text-body-secondary">(필수)</span></label>
+          <input type="password" class="form-control mb-1" id="password2"
+                 onblur="validateRegisterPasswordChk()" required="">
           <div class="error-message" id="passwordChk-error-message"></div>
         </div>
       </div>
@@ -40,7 +44,7 @@
           <label for="nickname" class="form-label">닉네임 <span class="text-body-secondary">(필수)</span></label>
           <div class="input-group has-validation mb-1">
             <input type="text" class="form-control" id="nickname"
-                   onblur="validateRegisterNickname(this.value)" required="">
+                   onblur="validateRegisterNickname()" required="">
           </div>
           <div class="error-message" id="nickname-error-message"></div>
         </div>
@@ -50,11 +54,11 @@
         <div class="col-md-6">
           <label for="email" class="form-label">이메일 <span class="text-body-secondary">(필수)</span></label>
           <input type="email" class="form-control mb-1" id="email"
-                 onblur="validateRegisterEmail(this.value)" required="">
+                 onblur="validateRegisterEmail()" required="">
           <div class="col-md-2">
             <button type="button" class="btn btn-primary mb-1"
-                    onclick="sendEmailVerification(document.getElementById('email').value)">
-              이메일 인증</button>
+                    onclick="sendEmailVerification()">
+              인증</button>
           </div>
           <div class="error-message" id="email-error-message"></div>
         </div>
@@ -68,7 +72,10 @@
       </div>
 
       <div class="d-flex justify-content-center mb-3">
-        <button class="w-80 btn btn-primary btn-lg col-md-6" type="submit">회원가입</button>
+        <button class="w-80 btn btn-primary btn-lg col-md-6"
+                onclick="register()"
+                type="submit">회원가입
+        </button>
       </div>
     </form>
 

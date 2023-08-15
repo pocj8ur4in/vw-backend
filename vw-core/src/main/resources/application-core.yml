@@ -1,21 +1,21 @@
-
----
-# 개발 (dev) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: dev
-
----
-# 스테이징 (staging) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: staging
-
----
-# 운영 (production) 프로파일
-spring:
-  config:
-    activate:
-      on-profile: production
+# 향후 프로파일을 세분화할 때 사용할 templates
+# ---
+# # 개발 (dev) 프로파일
+# spring:
+#   config:
+#     activate:
+#       on-profile: dev
+#
+# ---
+# # 스테이징 (staging) 프로파일
+# spring:
+#   config:
+#     activate:
+#       on-profile: staging
+#
+# ---
+# # 운영 (production) 프로파일
+# spring:
+#   config:
+#     activate:
+#       on-profile: production

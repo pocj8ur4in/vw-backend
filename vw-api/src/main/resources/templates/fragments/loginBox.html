@@ -2,9 +2,14 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="loginBoxFragment">
+  <a th:href="@{/}" class="d-flex justify-content-center mb-3">
+    <img src="https://cdn.pixabay.com/photo/2017/02/27/20/48/headphones-2104207_960_720.png"
+         width="48" height="48" class="rounded-circle">
+  </a>
+
   <h1 class="fw-normal text-center h3 mb-3">ID 로그인</h1>
 
-  <form class="mt-5 mb-2" th:action="@{/user/login}" method="post">
+  <form class="mt-5 mb-2" th:action="@{api/user/login}" method="post">
     <div class="form-floating">
       <input type="text" class="form-control" id="id" name="username" placeholder="name@example.com" onblur="validateLoginId()">
       <label for="id">아이디</label>

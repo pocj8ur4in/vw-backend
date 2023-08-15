@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 @Documented // Java Documents에도 포함
 @Component
 public @interface ExplainError {
-    String value() default "";
+	String value() default "";
 }
