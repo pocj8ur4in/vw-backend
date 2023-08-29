@@ -48,10 +48,10 @@ public class RedisConfig {
 				redisStandaloneConfiguration, lettuceClientConfiguration); // 내장 혹은 외부의 redis 연결
 	}
 
-	@Bean // RedisTemplate을 Bean으로 생성
-	public RedisTemplate<?, ?> redisTemplate() { // RedisTemplate : Redis 데이터를 처리하는 데 사용
-		RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
-		redisTemplate.setConnectionFactory(redisConnectionFactory());
+	@Bean // RedisTemplate : Redis 데이터를 처리하는 데 사용 (RedisTemplate을 Bean으로 생성)
+	public RedisTemplate<?, ?> redisTemplate() { // key, value에 해당하는 제네릭 타입을 와일드카드(?)로 선언
+		RedisTemplate<byte[], byte[]> redisTemplate =
+				new RedisTemplate<>(); // Redis에 바이트 배열로 직접 데이터 저장
 
 		// 일반적인 key:value일 경우에 직렬화
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -60,6 +60,9 @@ public class RedisConfig {
 		// Hash를 사용할 경우에 직렬화
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+
+		// 모든 경우
+		redisTemplate.setConnectionFactory(redisConnectionFactory());
 
 		return redisTemplate; // RedisConnection에서 넘겨준 byte 값 객체 직렬화
 	}

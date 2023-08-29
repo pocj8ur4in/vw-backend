@@ -112,6 +112,25 @@ function validateRegisterPasswordChk() {
     }
 }
 
+// 이메일 인증
+function sendEmailVerification() {
+    const email = document.getElementById("email").value;
+
+    $.ajax({
+        url: "/v1/user/register/send/email",
+        type: 'POST',
+        data: {
+            email: email
+        },
+        success : function (data) {
+            alert(data); // 성공 메시지 출력
+        },
+        error: function (xhr) {
+            alert(xhr.responseText); // 에러 메시지 출력
+        }
+    })
+}
+
 // 일반 회원가입
 function register() {
     event.preventDefault();

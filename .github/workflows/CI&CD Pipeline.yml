@@ -52,6 +52,40 @@ jobs:
       - name: Check spotless
         run: ./gradlew spotlessCheck
 
+      # github secret의 값을 통해 dockerfile 갱신
+      - name: Update dockerfile
+        run: |
+          cat dockerfile > dockerfile.temp
+          
+          echo "ENV DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> dockerfile.temp
+          echo "ENV DOCKERHUB_NAME=${{ secrets.DOCKERHUB_NAME }}" >> dockerfile.temp
+          echo "ENV DOCKERHUB_PORT=${{ secrets.DOCKERHUB_PORT }}" >> dockerfile.temp
+          echo "ENV RDS_ENDPOINT=${{ secrets.RDS_ENDPOINT }}" >> dockerfile.temp
+          echo "ENV RDS_PORT=${{ secrets.RDS_PORT }}" >> dockerfile.temp
+          echo "ENV CUSTOM_EMAIL_ADDRESS=${{ secrets.CUSTOM_EMAIL_ADDRESS }}" >> dockerfile.temp
+          echo "ENV CUSTOM_EMAIL_EMAIL=${{ secrets.CUSTOM_EMAIL_EMAIL }}" >> dockerfile.temp
+          echo "ENV CUSTOM_EMAIL_NAME=${{ secrets.CUSTOM_EMAIL_NAME }}" >> dockerfile.temp
+          echo "ENV JPA_BATCH_FETCH_SIZE=${{ secrets.JPA_BATCH_FETCH_SIZE }}" >> dockerfile.temp
+          echo "ENV JPA_DDL_AUTO=${{ secrets.JPA_DDL_AUTO }}" >> dockerfile.temp
+          echo "ENV JPA_DETER_DATASOURCE_INITIALIZATION=${{ secrets.JPA_DETER_DATASOURCE_INITIALIZATION }}" >> dockerfile.temp
+          echo "ENV JPA_FORMAT_SQL=${{ secrets.JPA_FORMAT_SQL }}" >> dockerfile.temp
+          echo "ENV JPA_SHOW_SQL=${{ secrets.JPA_SHOW_SQL }}" >> dockerfile.temp
+          echo "ENV LOGGING_LEVEL=${{ secrets.LOGGING_LEVEL }}" >> dockerfile.temp
+          echo "ENV RDS_DB_NAME=${{ secrets.RDS_DB_NAME }}" >> dockerfile.temp
+          echo "ENV RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> dockerfile.temp
+          echo "ENV RDS_USERNAME=${{ secrets.RDS_USERNAME }}" >> dockerfile.temp
+          echo "ENV REDIS_HOST=${{ secrets.REDIS_HOST }}" >> dockerfile.temp
+          echo "ENV REDIS_PORT=${{ secrets.REDIS_PORT }}" >> dockerfile.temp
+          echo "ENV REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> dockerfile.temp
+          echo "ENV SQL_INIT_MODE=${{ secrets.SQL_INIT_MODE }}" >> dockerfile.temp
+          echo "ENV MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> dockerfile.temp
+          echo "ENV MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> dockerfile.temp
+
+          
+          mv dockerfile.temp dockerfile
+
+        working-directory: ./vw-api
+
       # Gradle로 vw-api 모듈 빌드
       - name: Execute Gradle build
         run: ./gradlew :vw-api:build --no-daemon
@@ -89,20 +123,17 @@ jobs:
           script: |
             # 이전에 실행 중인 도커 컨테이너 중지
             sudo docker stop ${{ secrets.DOCKERHUB_NAME }}
-
+            
             # 이전에 실행 중인 도커 컨테이너 강제로 삭제
             sudo docker rm -f ${{ secrets.DOCKERHUB_NAME }}
-
+            
             # 최신 도커 이미지를 Docker Hub에서 EC2 인스턴스로 가져옴
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}:latest
-
+            
             # 새로운 도커 컨테이너 실행
             sudo docker run -p ${{ secrets.DOCKERHUB_PORT }}:8080 \
               --name ${{ secrets.DOCKERHUB_NAME }} \
               -d ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_NAME }}
-
-            # 모든 미사용 도커 이미지를 삭제
-            sudo docker image prune -a -f
 
       # gradlew 스크립트 권한 변경
       - name: gradlew permission change

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import vw.core.annotation.UseCase;
-import vw.core.dto.user.request.RegisterChkNicknameRequest;
+import vw.core.dto.user.RegisterChkNicknameRequest;
 import vw.core.exception.error.BaseCodeException;
 import vw.domain.user.service.UserService;
 

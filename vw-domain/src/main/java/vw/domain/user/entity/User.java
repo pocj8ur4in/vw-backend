@@ -16,15 +16,15 @@ import vw.domain.common.model.BaseDateTime;
 public class User extends BaseDateTime { // 회원 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_index")
+	@Column(name = "user_index", nullable = false, unique = true)
 	private long index; // 회원 식별자
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "user_user_Type", nullable = false)
+	@Column(name = "user_type", nullable = false)
 	private UserType userType; // 회원 유형 정보
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "user_user_State", nullable = false)
+	@Column(name = "user_state", nullable = false)
 	private UserState userState; // 회원 상태 정보
 
 	@Embedded private UserAuth userAuth; // 회원 인증 정보

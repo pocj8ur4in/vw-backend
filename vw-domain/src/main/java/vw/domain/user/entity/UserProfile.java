@@ -16,7 +16,7 @@ public class UserProfile { // 회원 프로필
 	@Column(name = "user_nickname", unique = true, length = 12, nullable = false)
 	private String nickname; // 회원 닉네임
 
-	@Column(name = "user_email", unique = true, nullable = false)
+	@Column(name = "user_email", unique = true, length = 128, nullable = false)
 	private String email; // 회원 이메일
 
 	@Embedded

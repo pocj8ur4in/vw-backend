@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import vw.api.user.controller.UserRegisterController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,7 +16,7 @@ import vw.api.user.controller.UserRegisterController;
 @Tag(name = "ViewController", description = "화면 이동과 관련된 컨트롤러입니다.")
 public class ViewController {
 	private static final Logger logger =
-			LoggerFactory.getLogger(UserRegisterController.class); // SLF4J를 활용한 로그 기록
+			LoggerFactory.getLogger(ViewController.class); // SLF4J를 활용한 로그 기록
 
 	@GetMapping(value = "/")
 	@Operation(summary = "홈 화면 이동", description = "홈 화면으로 이동합니다.")
@@ -40,6 +40,15 @@ public class ViewController {
 		logger.info("로그인 페이지 이동");
 
 		return "user/login";
+	}
+
+	@GetMapping("user/auth")
+	@Operation(summary = "이메일 인증 확인", description = "이메일 인증 확인 화면으로 이동합니다.")
+	public String userRegisterAuthEmailGET(
+			@RequestParam("email") String email, @RequestParam("key") String authKey) {
+		logger.info("> 회원가입 이메일 인증 화면 이동");
+
+		return "user/auth";
 	}
 
 	@GetMapping(value = "/post/vocalist")

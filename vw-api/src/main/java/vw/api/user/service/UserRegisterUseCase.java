@@ -4,14 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import vw.core.annotation.UseCase;
-import vw.core.dto.user.request.RegisterRequest;
+import vw.core.dto.user.RegisterRequest;
 import vw.core.exception.error.BaseCodeException;
+import vw.domain.common.handler.EmailHandler;
 import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
 public class UserRegisterUseCase {
 	private final UserService userService;
+	private final EmailHandler emailHandler;
 
 	@Transactional
 	public ResponseEntity<String> execute(RegisterRequest req) {
@@ -33,8 +35,8 @@ public class UserRegisterUseCase {
 			userService.chkPatternEmail(req.getEmail());
 			userService.chkAlreadyExistEmail(req.getEmail());
 
-			// 이메일 인증 확인
-			// ...
+			// 이메일 인증 활성화 여부 확인
+			emailHandler.chkAuth(req.getEmail());
 
 			// 회원가입 실행
 			userService.register(
@@ -43,6 +45,9 @@ public class UserRegisterUseCase {
 					req.getNickname(),
 					req.getEmail(),
 					req.getReceiveEmail());
+
+			// 이메일 인증 삭제
+			emailHandler.deleteAuth(req.getEmail());
 
 			return ResponseEntity.ok().body("회원가입이 성공하였습니다.");
 
