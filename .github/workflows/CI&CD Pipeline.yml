@@ -80,7 +80,6 @@ jobs:
           echo "ENV SQL_INIT_MODE=${{ secrets.SQL_INIT_MODE }}" >> dockerfile.temp
           echo "ENV MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> dockerfile.temp
           echo "ENV MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> dockerfile.temp
-
           
           mv dockerfile.temp dockerfile
 

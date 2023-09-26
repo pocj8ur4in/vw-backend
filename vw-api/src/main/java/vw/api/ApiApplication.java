@@ -21,7 +21,6 @@ import org.springframework.web.filter.ForwardedHeaderFilter;
 @Slf4j
 public class ApiApplication
 		implements ApplicationListener<ApplicationReadyEvent> { // 애플리케이션이 초기화되고 준비된 이후에 발생하는 이벤트 감지
-
 	private final Environment environment; // 환경 설정과 관련된 정보 제공
 
 	public static void main(String[] args) {

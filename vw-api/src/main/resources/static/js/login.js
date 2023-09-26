@@ -1,4 +1,5 @@
-function validateLoginId() { // 아이디 입력 창을 벗어났을 때, 아이디가 공란인지 확인
+// 아이디 입력 창을 벗어났을 때, 아이디가 공란인지 확인
+function validateLoginId() {
     const username = document.getElementById("id").value;
     const errorMessage = document.getElementById("id-error-message");
 
@@ -9,7 +10,8 @@ function validateLoginId() { // 아이디 입력 창을 벗어났을 때, 아이
     }
 }
 
-function validateLoginPassword() { // 비밀번호 입력창을 벗어났을 때, 비밀번호가 공란인지 확인
+// 비밀번호 입력창을 벗어났을 때, 비밀번호가 공란인지 확인
+function validateLoginPassword() {
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("password-error-message");
 
@@ -20,7 +22,8 @@ function validateLoginPassword() { // 비밀번호 입력창을 벗어났을 때
     }
 }
 
-function validateLogin() { // 로그인 버튼 클릭 시, 아이디 혹은 비밀번호가 공란인지 확인
+// 로그인 버튼 클릭 시, 아이디 혹은 비밀번호가 공란인지 확인
+function validateLogin() {
     const username = document.getElementById("id").value;
     const password = document.getElementById("password").value;
 
@@ -33,4 +36,22 @@ function validateLogin() { // 로그인 버튼 클릭 시, 아이디 혹은 비�
     }
 
     return true;
+}
+
+// 일반 로그인
+function login() {
+    const id = document.getElementById("id").value;
+    const password = document.getElementById("password").value;
+
+    $.ajax({
+        url: "/v1/user/login",
+        type : 'POST',
+        data: {
+            id: id,
+            password: password
+        },
+        error: function (xhr) {
+            alert(xhr.responseText); // 에러 메세지 출력
+        }
+    })
 }

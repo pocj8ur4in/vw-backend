@@ -19,7 +19,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Import(RedisConfig.class) // RedisConnectionFactory으로 CacheManager 설정
 public class RedisCacheConfig {
 	@Bean
-	@Primary
+	@Primary // 해당 빈을 우선적으로 선택해 주입
 	public CacheManager redisCacheManager(
 			RedisConnectionFactory redisConnectionFactory) { // 기본 CacheManager 설정
 		// redis 캐시의 기본 설정을 구성
@@ -42,10 +42,10 @@ public class RedisCacheConfig {
 				.build();
 	}
 
-	// OIDC (OpenID Connect) : 인증 및 권한 부여를 위한 프로토콜
 	@Bean
 	public CacheManager oidcCacheManager(
-			RedisConnectionFactory redisConnectionFactory) { // OIDC CacheManager 설정
+			RedisConnectionFactory
+					redisConnectionFactory) { // OIDC CacheManager 설정 (OIDC : 인증 및 권한 부여를 위한 프로토콜)
 		// OIDC Cache의 redis 캐시 설정을 구성
 		RedisCacheConfiguration redisCacheConfiguration =
 				RedisCacheConfiguration.defaultCacheConfig()

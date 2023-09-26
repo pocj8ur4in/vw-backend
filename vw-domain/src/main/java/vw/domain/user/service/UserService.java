@@ -121,6 +121,11 @@ public class UserService {
 		userAdaptor.save(user); // 사용자를 저장소에 저장
 	}
 
+	// public LoginResponse login(String id, String password) {
+	//	logger.info(">> 로그인");
+	//  userAdaptor.existsUserByUserAuth_Id();
+	// }
+
 	/*
 	public LoginResponse login(LoginRequest req) { // 일반 로그인
 		if (!userRepository.existsUserByUserAuth_Id(req.getId())) // 입력받은 아이디가 존재하지 않는 경우

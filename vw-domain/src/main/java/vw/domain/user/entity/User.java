@@ -1,6 +1,7 @@
 package vw.domain.user.entity;
 
 import jakarta.persistence.*;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +33,9 @@ public class User extends BaseDateTime { // 회원 엔티티
 	@Embedded private UserProfile userProfile; // 회원 프로필 정보
 
 	@Embedded private UserToogle userToogle; // 회원 토글 정보
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private List<UserPost> post; // 회원 포스트
 
 	@Builder
 	public User(
