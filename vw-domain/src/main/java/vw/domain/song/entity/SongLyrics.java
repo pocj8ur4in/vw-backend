@@ -21,6 +21,10 @@ public class SongLyrics {
 	@Column(name = "song_lyrics_content", nullable = false)
 	private String content; // 노래 가사 내용
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "song_lyrics_language", nullable = false)
+	private SongLyricsLanguage songLyricsLanguage; // 노래 가사 언어
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Song song; // 노래 식별자

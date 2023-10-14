@@ -31,8 +31,7 @@ public class SongLink {
 	@Column(name = "song_link_description")
 	private String description; // 노래 링크 설명
 
-	@Lob
-	@Column(name = "song_link_content", nullable = false)
+	@Column(name = "song_link_content", nullable = false, length = 1023)
 	private String content; // 노래 링크 내용
 
 	@Column(name = "song_link_is_deleted", nullable = false)
