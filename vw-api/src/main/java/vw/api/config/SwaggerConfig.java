@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class SwaggerConfig { // Swagger3 설정
 	@Bean
-	public GroupedOpenApi groupedOpenApi() {
+	public GroupedOpenApi groupedOpenApi() { // OpenAPI 문서 생성 및 관리
 		String[] paths = {"/**"}; // Swagger 경로 지정
 
 		// GroupedOpenApi : 그룹화된 OpenAPI 스펙을 담은 객체

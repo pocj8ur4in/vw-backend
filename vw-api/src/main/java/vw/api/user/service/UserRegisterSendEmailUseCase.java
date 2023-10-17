@@ -11,7 +11,7 @@ import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserRegisterSendEmailUseCase {
+public class UserRegisterSendEmailUseCase { // 이메일 인증 전송
 	private final UserService userService;
 	private final EmailHandler emailHandler;
 

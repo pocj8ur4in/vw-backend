@@ -19,7 +19,7 @@ import vw.core.dto.user.LoginRequest;
 @Slf4j
 @Tag(name = "UserLoginController", description = "로그인과 관련된 컨트롤러입니다.")
 @RequestMapping(value = "v1/user")
-public class UserLoginController {
+public class UserLoginController { // 로그인과 관련된 컨트롤러
 	private final UserLoginUseCase userLoginUseCase;
 
 	private static final Logger logger =
@@ -28,7 +28,7 @@ public class UserLoginController {
 	@ResponseBody
 	@PostMapping("/login")
 	@Operation(summary = "로그인", description = "로그인을 실행합니다.")
-	public ResponseEntity<String> userLoginPOST(LoginRequest req) {
+	public ResponseEntity<String> userLoginPOST(LoginRequest req) { // 로그인 실행
 		logger.info("> 로그인");
 
 		return userLoginUseCase.execute(req);

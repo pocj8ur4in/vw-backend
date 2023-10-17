@@ -19,7 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig { // 스프링 시큐리티 설정
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity httpSecurity)
+			throws Exception { // 스프링 시큐리티의 보안 필터를 조합해 HttpSecurity 반환
 		httpSecurity
 				// HTTP 기본 인증 비활성화
 				.httpBasic(AbstractHttpConfigurer::disable)

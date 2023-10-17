@@ -11,7 +11,7 @@ import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserRegisterUseCase {
+public class UserRegisterUseCase { // 회원가입 실행
 	private final UserService userService;
 	private final EmailHandler emailHandler;
 

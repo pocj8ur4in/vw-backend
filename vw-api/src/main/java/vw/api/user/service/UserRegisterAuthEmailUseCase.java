@@ -10,7 +10,7 @@ import vw.domain.common.handler.EmailHandler;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserRegisterAuthEmailUseCase {
+public class UserRegisterAuthEmailUseCase { // 이메일 인증 확인
 	private final EmailHandler emailHandler;
 
 	@Transactional

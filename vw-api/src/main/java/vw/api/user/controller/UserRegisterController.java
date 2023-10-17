@@ -16,7 +16,7 @@ import vw.core.dto.user.*;
 @Slf4j
 @Tag(name = "UserRegisterController", description = "회원가입과 관련된 컨트롤러입니다.")
 @RequestMapping(value = "v1/user")
-public class UserRegisterController {
+public class UserRegisterController { // 회원가입과 관련된 컨트롤러
 	private final UserRegisterChkIdUseCase userRegisterChkIdUseCase;
 	private final UserRegisterChkNicknameUseCase userRegisterChkNicknameUseCase;
 	private final UserRegisterChkEmailUseCase userRegisterChkEmailUseCase;
@@ -30,7 +30,8 @@ public class UserRegisterController {
 	@ResponseBody
 	@PostMapping("/register/chk/id")
 	@Operation(summary = "아이디 유효성 검사", description = "아이디 유효성 검사를 검사합니다.")
-	public ResponseEntity<String> userRegisterChkIdPOST(RegisterChkIdRequest req) {
+	public ResponseEntity<String> userRegisterChkIdPOST(
+			RegisterChkIdRequest req) { // 회원가입 아이디 유효성 검사
 		logger.info("> 회원가입 아이디 유효성 검사");
 
 		return userRegisterChkIdUseCase.execute(req);
@@ -39,7 +40,8 @@ public class UserRegisterController {
 	@ResponseBody
 	@PostMapping("/register/chk/nickname")
 	@Operation(summary = "닉네임 유효성 검사", description = "닉네임 유효성 검사를 검사합니다.")
-	public ResponseEntity<String> userRegisterChkNicknamePOST(RegisterChkNicknameRequest req) {
+	public ResponseEntity<String> userRegisterChkNicknamePOST(
+			RegisterChkNicknameRequest req) { // 닉네임 유효성 검사
 		logger.info("> 회원가입 닉네임 유효성 검사");
 		return userRegisterChkNicknameUseCase.execute(req);
 	}
@@ -47,7 +49,8 @@ public class UserRegisterController {
 	@ResponseBody
 	@PostMapping("/register/chk/email")
 	@Operation(summary = "이메일 유효성 검사", description = "이메일 유효성 검사를 실행합니다.")
-	public ResponseEntity<String> userRegisterChkEmailPOST(RegisterChkEmailRequest req) {
+	public ResponseEntity<String> userRegisterChkEmailPOST(
+			RegisterChkEmailRequest req) { // 이메일 유효성 검사
 		logger.info("> 회원가입 이메일 유효성 검사");
 
 		return userRegisterChkEmailUseCase.execute(req);
@@ -56,7 +59,8 @@ public class UserRegisterController {
 	@ResponseBody
 	@PostMapping("/register/send/email")
 	@Operation(summary = "이메일 인증 전송", description = "이메일 인증 전송을 실행합니다.")
-	public ResponseEntity<String> userRegisterSendEmailPOST(RegisterSendEmailRequest req) {
+	public ResponseEntity<String> userRegisterSendEmailPOST(
+			RegisterSendEmailRequest req) { // 이메일 인증 전송
 		logger.info("> 회원가입 이메일 인증 전송");
 
 		return userRegisterSendEmailUseCase.execute(req);
@@ -66,7 +70,7 @@ public class UserRegisterController {
 	@PostMapping("/register/auth/email")
 	@Operation(summary = "이메일 인증 확인", description = "이메일 인증 확인을 실행합니다.")
 	public ResponseEntity<String> userRegisterAuthEmailPOST(
-			@RequestParam("email") String email, @RequestParam("key") String authKey) {
+			@RequestParam("email") String email, @RequestParam("key") String authKey) { // 이메일 인증 확인
 		logger.info("> 회원가입 이메일 인증 확인");
 
 		return userRegisterAuthEmailUseCase.execute(
@@ -76,7 +80,7 @@ public class UserRegisterController {
 	@ResponseBody
 	@PostMapping("/register")
 	@Operation(summary = "회원가입", description = "회원가입을 실행합니다.")
-	public ResponseEntity<String> userRegisterPOST(RegisterRequest req) {
+	public ResponseEntity<String> userRegisterPOST(RegisterRequest req) { // 회원가입 실행
 		logger.info("> 회원가입");
 
 		return userRegisterUseCase.execute(req);

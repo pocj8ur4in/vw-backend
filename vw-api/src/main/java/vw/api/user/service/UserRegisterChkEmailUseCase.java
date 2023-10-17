@@ -11,7 +11,7 @@ import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserRegisterChkEmailUseCase {
+public class UserRegisterChkEmailUseCase { // 이메일 유효성 검사
 	private final UserService userService;
 	private final EmailHandler emailHandler;
 

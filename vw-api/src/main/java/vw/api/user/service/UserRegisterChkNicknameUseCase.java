@@ -10,7 +10,7 @@ import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserRegisterChkNicknameUseCase {
+public class UserRegisterChkNicknameUseCase { // 닉네임 유효성 검사
 	private final UserService userService;
 
 	@Transactional

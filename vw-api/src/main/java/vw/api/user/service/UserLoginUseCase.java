@@ -10,7 +10,7 @@ import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserLoginUseCase {
+public class UserLoginUseCase { // 로그인 실행
 	private final UserService userService;
 
 	@Transactional

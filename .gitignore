@@ -233,3 +233,8 @@ Temporary Items
 ### Redis ###
 # Ignore redis binary dump (dump.rdb) files
 *.rdb
+
+### Custom ###
+.env
+.$vocawik.drawio.bkp
+.$vocawik.drawio.dtmp

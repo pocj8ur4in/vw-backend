@@ -10,7 +10,7 @@ import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserRegisterChkIdUseCase {
+public class UserRegisterChkIdUseCase { // 회원가입 아이디 유효성 검사
 	private final UserService userService;
 
 	@Transactional
