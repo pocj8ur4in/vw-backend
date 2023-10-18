@@ -14,7 +14,7 @@ import vw.domain.common.entity.LinkType;
 @Table(name = "tbl_song_link")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SongLink {
+public class SongLink { // 노래 링크 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "song_link_index", nullable = false, unique = true)

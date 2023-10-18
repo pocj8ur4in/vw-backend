@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "tbl_song_link_info")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SongLinkInfo {
+public class SongLinkInfo { // 노래 링크 정보 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "song_link_info_index", nullable = false, unique = true)

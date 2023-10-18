@@ -26,11 +26,11 @@ public class Vocalist { // 가수 엔티티
 	@Column(name = "vocalist_translated_name")
 	private String translatedName; // 가수 번역 이름
 
-	@OneToMany(mappedBy = "vocalist", cascade = CascadeType.PERSIST, orphanRemoval = true)
-	private List<VocalistLink> links; // 가수 링크
-
 	@Column(name = "vocalist_release_date")
 	private Date releaseDate; // 가수 투고일
+
+	@OneToMany(mappedBy = "vocalist", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private List<VocalistLink> links; // 가수 링크
 
 	@OneToMany(mappedBy = "vocalist", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<SongVocalist> vocalist; // 노래 가수

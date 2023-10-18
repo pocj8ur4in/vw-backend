@@ -14,11 +14,11 @@ import vw.domain.common.entity.LinkType;
 @Table(name = "tbl_artist_link")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ArtistLink {
+public class ArtistLink { // 아티스트 링크 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "artist_link_index", nullable = false, unique = true)
-	private long index; // 노래 링크 식별자
+	private long index; // 아티스트 링크 식별자
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "artist_link_category", nullable = false)

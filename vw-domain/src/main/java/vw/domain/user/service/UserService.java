@@ -13,13 +13,13 @@ import vw.domain.user.entity.*;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService { // 회원 서비스
 	private final UserAdaptor userAdaptor;
 
 	private static final Logger logger =
 			LoggerFactory.getLogger(UserService.class); // SLF4J를 활용한 로그 기록
 
-	public void chkEmptyId(String id) {
+	public void chkEmptyId(String id) { // 아이디 공란 여부 확인
 		logger.info(">> 아이디 공란 여부 확인");
 
 		if (id == null || id.isEmpty()) {
@@ -27,7 +27,7 @@ public class UserService {
 		}
 	}
 
-	public void chkLengthId(String id) {
+	public void chkLengthId(String id) { // 아이디 길이 확인
 		logger.info(">> 아이디 길이 확인");
 
 		Pattern pattern = Pattern.compile(ID_PATTERN_LENGTH);
@@ -37,7 +37,7 @@ public class UserService {
 		}
 	}
 
-	public void chkPatternId(String id) {
+	public void chkPatternId(String id) { // 아이디 형식 확인
 		logger.info(">> 아이디 형식 확인");
 
 		if (!Pattern.matches(ID_PATTERN, id)) {
@@ -45,13 +45,13 @@ public class UserService {
 		}
 	}
 
-	public void chkAlreadyExistId(String id) {
+	public void chkAlreadyExistId(String id) { // 아이디 중복 여부 확인
 		logger.info(">> 아이디 중복 여부 확인");
 
 		userAdaptor.existsUserByUserAuth_Id(id);
 	}
 
-	public void chkEmptyNickname(String nickname) {
+	public void chkEmptyNickname(String nickname) { // 닉네임 공란 여부 확인
 		logger.info(">> 닉네임 공란 여부 확인");
 
 		if (nickname == null || nickname.isEmpty()) {
@@ -59,7 +59,7 @@ public class UserService {
 		}
 	}
 
-	public void chkLengthNickname(String nickname) {
+	public void chkLengthNickname(String nickname) { // 닉네임 길이 확인
 		logger.info(">> 닉네임 길이 확인");
 
 		Pattern pattern = Pattern.compile(NICKNAME_PATTERN_LENGTH);
@@ -69,7 +69,7 @@ public class UserService {
 		}
 	}
 
-	public void chkPatterNickname(String nickname) {
+	public void chkPatterNickname(String nickname) { // 닉네임 형식 확인
 		logger.info(">> 닉네임 형식 확인");
 
 		if (!Pattern.matches(NICKNAME_PATTERN, nickname)) {
@@ -77,13 +77,13 @@ public class UserService {
 		}
 	}
 
-	public void chkAlreadyExistNickname(String nickname) {
+	public void chkAlreadyExistNickname(String nickname) { // 닉네임 중복 여부 확인
 		logger.info(">> 닉네임 중복 여부 확인");
 
 		userAdaptor.existsUserByUserProfile_Nickname(nickname);
 	}
 
-	public void chkEmptyEmail(String email) {
+	public void chkEmptyEmail(String email) { // 이메일 공란 여부 확인
 		logger.info(">> 이메일 공란 여부 확인");
 
 		if (email == null || email.isEmpty()) {
@@ -91,7 +91,7 @@ public class UserService {
 		}
 	}
 
-	public void chkPatternEmail(String email) {
+	public void chkPatternEmail(String email) { // 이메일 형식 확인
 		logger.info(">> 이메일 형식 확인");
 
 		if (!Pattern.matches(EMAIL_PATTERN, email)) {
@@ -99,14 +99,18 @@ public class UserService {
 		}
 	}
 
-	public void chkAlreadyExistEmail(String email) {
+	public void chkAlreadyExistEmail(String email) { // 이메일 중복 여부 확인
 		logger.info(">> 이메일 중복 여부 확인");
 
 		userAdaptor.existsUserByUserProfile_Email(email);
 	}
 
 	public void register(
-			String id, String password, String nickname, String email, Boolean receiveEmail) {
+			String id,
+			String password,
+			String nickname,
+			String email,
+			Boolean receiveEmail) { // 회원가입
 		logger.info(">> 회원가입");
 
 		User user =

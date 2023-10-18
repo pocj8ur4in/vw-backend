@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import vw.domain.artist.entity.Artist;
 
 @EnableJpaRepositories
-public interface ArtistRepository extends JpaRepository<Artist, Long> {}
+public interface ArtistRepository extends JpaRepository<Artist, Long> { // 아티스트 레포지토리
+}

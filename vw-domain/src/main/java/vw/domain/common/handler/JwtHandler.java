@@ -19,7 +19,7 @@ import vw.domain.common.properties.JwtProperties;
 
 @RequiredArgsConstructor
 @Component
-public class JwtHandler {
+public class JwtHandler { // JWT 핸들러
 	private final JwtProperties jwtProperties;
 
 	public String generateAccessToken(Long id, String role) { // AccessToken 생성
@@ -50,7 +50,7 @@ public class JwtHandler {
 				.equals(ACCESS_TOKEN); // 가져온 토큰 타입이 ACCESS_TOKEN과 같은지 비교
 	}
 
-	public boolean isRefreshToken(String token) { // 주어진 JWT 토큰(token)이 RefreshToken인지 여부 확인
+	public boolean isRefreshToken(String token) { // 주어진 JWT 토큰이 RefreshToken인지 여부 확인
 		// getJws을 통해 주어진 토큰을 파싱하고, JWT의 Body인 Claims를 가져옴
 		return getJws(token)
 				.getBody()

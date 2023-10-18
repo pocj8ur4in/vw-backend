@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "tbl_song_lyrics")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SongLyrics {
+public class SongLyrics { // 노래 가사 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "song_lyrics_index", nullable = false, unique = true)

@@ -13,7 +13,7 @@ import vw.domain.artist.entity.ArtistType;
 @Table(name = "tbl_song_artist")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SongArtist {
+public class SongArtist { // 노래 아티스트 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "song_artist_index", nullable = false, unique = true)

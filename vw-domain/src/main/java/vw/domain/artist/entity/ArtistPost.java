@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "tbl_artist_post")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ArtistPost {
+public class ArtistPost { // 아티스트 포스트 엔티티
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "artist_post_index", nullable = false, unique = true)

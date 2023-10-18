@@ -22,7 +22,7 @@ import vw.domain.common.utils.EmailUtils;
 
 @Component
 @RequiredArgsConstructor
-public class EmailHandler {
+public class EmailHandler { // 이메일 핸들러
 	private static final Logger logger =
 			LoggerFactory.getLogger(EmailHandler.class); // SLF4J를 활용한 로그 기록
 	private final EmailProperties emailProperties;
@@ -39,7 +39,7 @@ public class EmailHandler {
 			logger.info(">>> 이메일 전송 실패");
 
 			authMailAdaptor.deleteByEmail(email);
-			throw EmailSendFailException.baseCodeException;
+			throw EmailSendFailException.baseCodeException; // 이메일 전송이 실패한 경우
 		}
 	}
 
@@ -80,7 +80,7 @@ public class EmailHandler {
 		authMailAdaptor.existsAuthMailByEmail(email);
 	}
 
-	private String createAuthKey() {
+	private String createAuthKey() { // 인증 키 생성
 		logger.info(">> 인증 키 생성");
 
 		int num = 0;
@@ -101,7 +101,7 @@ public class EmailHandler {
 		return stringBuilder.toString();
 	}
 
-	private void saveAuthkey(String email, String authKey) {
+	private void saveAuthkey(String email, String authKey) { // 인증 키 저장
 		logger.info(">> 인증 키 저장");
 
 		authMailAdaptor.save(
@@ -113,7 +113,8 @@ public class EmailHandler {
 						.build());
 	}
 
-	private EmailUtils createAuthEmail(String email, String authKey) throws MessagingException {
+	private EmailUtils createAuthEmail(String email, String authKey)
+			throws MessagingException { // 인증 메일 생성
 		logger.info(">> 인증 메일 생성");
 
 		EmailUtils emailUtils = new EmailUtils(javaMailSender);
@@ -135,21 +136,21 @@ public class EmailHandler {
 	}
 
 	private void sendMail(EmailUtils emailUtils)
-			throws MessagingException, UnsupportedEncodingException {
-		logger.info(">> 인증 메일 전송");
+			throws MessagingException, UnsupportedEncodingException { // 메일 전송
+		logger.info(">> 메일 전송");
 
 		emailUtils.setFrom(
 				new InternetAddress(emailProperties.getEmail(), emailProperties.getName()));
 		emailUtils.send();
 	}
 
-	private AuthMail chkAuthkey(String authKey) {
+	private AuthMail chkAuthkey(String authKey) { // 인증 키를 통해 인증 정보 불러옴
 		logger.info(">> 인증 키를 통해 인증 정보 불러옴");
 
 		return authMailAdaptor.findAuthMailByAuthKey(authKey);
 	}
 
-	private void chkUnauthenticated(Boolean authenticated) {
+	private void chkUnauthenticated(Boolean authenticated) { // 인증 정보가 인증되지 않았는지 확인
 		logger.info(">> 인증 정보가 인증되지 않았는지 확인");
 
 		if (authenticated != Boolean.FALSE) {
@@ -157,13 +158,13 @@ public class EmailHandler {
 		}
 	}
 
-	private void chkAuthMailByEmail(String email1, String email2) {
+	private void chkAuthMailByEmail(String email1, String email2) { // 불러온 & 전송된 인증 이메일 비교
 		logger.info(">> 불러온 & 전송된 인증 이메일 비교");
 
 		if (!Objects.equals(email1, email2)) throw InvalidEmailException.baseCodeException;
 	}
 
-	private void validateAuthKey(AuthMail authMail) {
+	private void validateAuthKey(AuthMail authMail) { // 인증 정보 활성화
 		logger.info(">> 인증 정보 활성화");
 
 		authMailAdaptor.update(

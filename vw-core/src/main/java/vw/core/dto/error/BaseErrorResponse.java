@@ -5,8 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class BaseErrorResponse { // 오류에 대한 응답을 나타내는 DTO
-	private final boolean success = false;
-
+	private final boolean success = false; // 성공 여부 : 오류에 대한 응답이므로 항상 false
 	private final Integer status; // HTTP 상태 코드
 	private final String code; // HTTP 상태 코드 (문자열)
 	private final String reason; // 오류의 원인

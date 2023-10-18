@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import vw.domain.vocalist.entity.Vocalist;
 
 @EnableJpaRepositories
-public interface VocalistRepository extends JpaRepository<Vocalist, Long> {}
+public interface VocalistRepository extends JpaRepository<Vocalist, Long> { // 가수 레포지토리
+}

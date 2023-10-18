@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "custom.email")
-public class EmailProperties {
+public class EmailProperties { // 이메일 프로퍼티
 	private String address; // 발송 주소
 	private String email; // 발송 이메일
 	private String name; // 발송자 이름
