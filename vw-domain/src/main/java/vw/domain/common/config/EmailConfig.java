@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
-public class EmailConfig {
+public class EmailConfig { // 메일 전송 기능에 관련된 설정 관리
 	@Value("${spring.mail.host}")
 	private String host;
 
@@ -58,7 +58,7 @@ public class EmailConfig {
 	private boolean debug;
 
 	@Bean
-	public JavaMailSender getJavaMailSender() {
+	public JavaMailSender getJavaMailSender() { // JavaMail API으로 이메일을 전송하는 데 필요한 설정을 관리
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
 		javaMailSender.setHost(host);
@@ -72,7 +72,7 @@ public class EmailConfig {
 		return javaMailSender;
 	}
 
-	private Properties getMailProperties() {
+	private Properties getMailProperties() { // 이메일 클라이언트 또는 전송 서버와 관련된 속성을 설정
 		Properties properties = new Properties();
 
 		properties.put("mail.smtp.auth", auth);

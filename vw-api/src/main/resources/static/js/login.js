@@ -1,5 +1,4 @@
-// 아이디 입력 창을 벗어났을 때, 아이디가 공란인지 확인
-function validateLoginId() {
+function validateLoginId() { // 아이디 입력 창을 벗어났을 때, 아이디가 공란인지 확인
     const username = document.getElementById("id").value;
     const errorMessage = document.getElementById("id-error-message");
 
@@ -10,8 +9,7 @@ function validateLoginId() {
     }
 }
 
-// 비밀번호 입력창을 벗어났을 때, 비밀번호가 공란인지 확인
-function validateLoginPassword() {
+function validateLoginPassword() { // 비밀번호 입력창을 벗어났을 때, 비밀번호가 공란인지 확인
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("password-error-message");
 
@@ -22,8 +20,7 @@ function validateLoginPassword() {
     }
 }
 
-// 로그인 버튼 클릭 시, 아이디 혹은 비밀번호가 공란인지 확인
-function validateLogin() {
+function validateLogin() { // 로그인 버튼 클릭 시, 아이디 혹은 비밀번호가 공란인지 확인
     const username = document.getElementById("id").value;
     const password = document.getElementById("password").value;
 
@@ -38,8 +35,7 @@ function validateLogin() {
     return true;
 }
 
-// 일반 로그인
-function login() {
+function login() { // 일반 로그인
     const id = document.getElementById("id").value;
     const password = document.getElementById("password").value;
 

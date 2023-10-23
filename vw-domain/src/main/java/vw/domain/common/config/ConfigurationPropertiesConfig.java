@@ -10,4 +10,5 @@ import vw.domain.common.properties.JwtProperties;
 	EmailProperties.class
 }) // Spring 컨텍스트에서 properties 클래스를 Bean으로 등록
 @Configuration
-public class ConfigurationPropertiesConfig {} // 애플리케이션에서 사용되는 properties를 자동으로 구성
+public class ConfigurationPropertiesConfig { // 애플리케이션에서 사용되는 properties를 자동으로 구성
+}

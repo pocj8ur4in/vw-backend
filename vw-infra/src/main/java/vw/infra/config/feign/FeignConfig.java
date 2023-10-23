@@ -17,7 +17,7 @@ import vw.infra.outer.api.BaseFeignClientPackage;
 @Configuration
 @EnableFeignClients(
 		basePackageClasses = BaseFeignClientPackage.class) // 해당 클래스가 위치한 패키지 밑에서 Feign 클라이언트를 탐색
-public class FeignConfig { //  Feign 클라이언트가 응답을 디코딩할 때 사용할 디코더 정의
+public class FeignConfig { // Feign 클라이언트가 응답을 디코딩할 때 사용할 디코더를 정의
 	@Bean
 	public Decoder feignDecoder() {
 		return new JacksonDecoder(

@@ -1,4 +1,4 @@
-package vw.domain.common.entity;
+package vw.domain.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

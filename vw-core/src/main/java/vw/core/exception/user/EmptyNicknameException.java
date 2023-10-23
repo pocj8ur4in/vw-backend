@@ -6,7 +6,7 @@ import vw.core.exception.error.UserErrorCode;
 public class EmptyNicknameException extends BaseCodeException { // 닉네임이 공란인 경우
 	public static final BaseCodeException baseCodeException = new EmptyNicknameException();
 
-	public EmptyNicknameException() {
+	private EmptyNicknameException() {
 		super(UserErrorCode.EMPTY_NICKNAME);
 	}
 }

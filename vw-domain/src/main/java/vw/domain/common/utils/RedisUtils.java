@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RedisUtils {
+public class RedisUtils { // 레디스 유틸리티
 	private final RedisTemplate<byte[], byte[]> redisTemplate;
 
 	public void setData(byte[] key, byte[] value, int expiredTime) {

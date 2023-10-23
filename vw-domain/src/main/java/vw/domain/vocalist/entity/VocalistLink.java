@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import vw.domain.common.entity.LinkType;
+import vw.domain.common.model.LinkType;
 
 @Entity
 @Table(name = "tbl_vocalist_link")

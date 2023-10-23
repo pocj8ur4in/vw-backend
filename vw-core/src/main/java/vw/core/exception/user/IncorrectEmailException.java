@@ -6,7 +6,7 @@ import vw.core.exception.error.UserErrorCode;
 public class IncorrectEmailException extends BaseCodeException { // 이메일 형식이 잘못된 경우
 	public static final BaseCodeException baseCodeException = new IncorrectEmailException();
 
-	public IncorrectEmailException() {
+	private IncorrectEmailException() {
 		super(UserErrorCode.INCORRECT_EMAIL);
 	}
 }

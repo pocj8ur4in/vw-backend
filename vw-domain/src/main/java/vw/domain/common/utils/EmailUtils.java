@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailUtils {
+public class EmailUtils { // 이메일 유틸리티
 	private final JavaMailSender javaMailSender;
 	private final MimeMessage mimeMessage;
 	private final MimeMessageHelper mimeMessageHelper;

@@ -113,16 +113,14 @@ public class UserService { // 회원 서비스
 			Boolean receiveEmail) { // 회원가입
 		logger.info(">> 회원가입");
 
-		User user =
+		userAdaptor.save(
 				User.builder()
 						.userType(UserType.TYPE_NORMAL)
 						.userState(UserState.STATE_NORMAL)
 						.userAuth(UserAuth.builder().id(id).password(password).build())
 						.userProfile(UserProfile.builder().nickname(nickname).email(email).build())
 						.userToogle(UserToogle.builder().receiveEmail(receiveEmail).build())
-						.build(); // 사용자 생성
-
-		userAdaptor.save(user); // 사용자를 저장소에 저장
+						.build()); // 사용자를 저장소에 저장
 	}
 
 	// public LoginResponse login(String id, String password) {

@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import vw.domain.common.entity.LinkCategory;
-import vw.domain.common.entity.LinkType;
+import vw.domain.common.model.LinkCategory;
+import vw.domain.common.model.LinkType;
 
 @Entity
 @Table(name = "tbl_song_link")

@@ -6,7 +6,7 @@ import vw.core.exception.error.UserErrorCode;
 public class LoginFailureException extends BaseCodeException { // 로그인이 실패한 경우
 	public static final BaseCodeException baseCodeException = new LoginFailureException();
 
-	public LoginFailureException() {
+	private LoginFailureException() {
 		super(UserErrorCode.LOGIN_FAILURE);
 	}
 }

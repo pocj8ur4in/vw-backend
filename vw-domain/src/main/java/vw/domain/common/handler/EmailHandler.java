@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-import vw.core.exception.authMail.EmailSendFailException;
-import vw.core.exception.authMail.InvalidAuthKeyException;
-import vw.core.exception.authMail.InvalidEmailException;
-import vw.core.exception.user.RegisterFailureException;
+import vw.core.exception.authMail.*;
 import vw.domain.common.adopter.AuthMailAdaptor;
 import vw.domain.common.entity.AuthMail;
 import vw.domain.common.properties.EmailProperties;
@@ -30,29 +27,34 @@ public class EmailHandler { // 이메일 핸들러
 	@Autowired JavaMailSender javaMailSender;
 
 	public void sendAuthEmail(String email) { // 인증 메일 전송
+		logger.info(">> 인증 메일 전송");
+
 		try {
 			String authKey = createAuthKey();
 			saveAuthkey(email, authKey);
 			EmailUtils emailUtils = createAuthEmail(email, authKey);
 			sendMail(emailUtils);
 		} catch (Exception exception) {
-			logger.info(">>> 이메일 전송 실패");
+			logger.info(">> 이메일 전송 실패");
 
 			authMailAdaptor.deleteByEmail(email);
+
 			throw EmailSendFailException.baseCodeException; // 이메일 전송이 실패한 경우
 		}
 	}
 
 	public void authAuthKey(String email, String authKey) { // 이메일 인증 활성화
+		logger.info(">> 이메일 인증 활성화");
+
 		try {
 			AuthMail authMail = chkAuthkey(authKey);
 			chkUnauthenticated(authMail.getAuthenticated());
 			chkAuthMailByEmail(authMail.getEmail(), email);
 			validateAuthKey(authMail);
 		} catch (Exception exception) {
-			logger.info(">>> 이메일 인증 활성화 실패");
+			logger.info(">> 이메일 인증 활성화 실패");
 
-			throw exception;
+			throw AuthMailFailException.baseCodeException; // 이메일 인증이 실패한 경우
 		}
 	}
 
@@ -61,10 +63,11 @@ public class EmailHandler { // 이메일 핸들러
 
 		try {
 			AuthMail authMail = authMailAdaptor.findAuthMailByEmail(email);
-			if (authMail.getAuthenticated() == Boolean.FALSE)
-				throw RegisterFailureException.baseCodeException;
+			if (authMail.getAuthenticated() == Boolean.FALSE) throw new RuntimeException();
 		} catch (Exception exception) {
-			throw RegisterFailureException.baseCodeException;
+			logger.info(">> 이메일 인증 비활성화");
+
+			throw AuthKeyAuthenticatedIsFalseException.baseCodeException; // 이메일 인증이 비활성화인 경우
 		}
 	}
 

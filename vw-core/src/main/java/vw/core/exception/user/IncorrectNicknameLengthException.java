@@ -7,7 +7,7 @@ public class IncorrectNicknameLengthException extends BaseCodeException { // 닉
 	public static final BaseCodeException baseCodeException =
 			new IncorrectNicknameLengthException();
 
-	public IncorrectNicknameLengthException() {
+	private IncorrectNicknameLengthException() {
 		super(UserErrorCode.INCORRECT_NICKNAME_LENGTH);
 	}
 }

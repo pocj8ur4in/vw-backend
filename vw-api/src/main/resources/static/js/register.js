@@ -1,5 +1,4 @@
-// 아이디 유효성 검사
-function validateRegisterId() {
+function validateRegisterId() { // 아이디 유효성 검사
     const id = document.getElementById("id").value;
     const errorMessage = document.getElementById("id-error-message");
 
@@ -16,8 +15,7 @@ function validateRegisterId() {
     })
 }
 
-// 닉네임 유효성 검사
-function validateRegisterNickname() {
+function validateRegisterNickname() { // 닉네임 유효성 검사
     const nickname = document.getElementById("nickname").value;
     const errorMessage = document.getElementById("nickname-error-message");
 
@@ -34,8 +32,7 @@ function validateRegisterNickname() {
     })
 }
 
-// 이메일 유효성 검사
-function validateRegisterEmail() {
+function validateRegisterEmail() { // 이메일 유효성 검사
     const email = document.getElementById("email").value;
     const errorMessage = document.getElementById("email-error-message");
 
@@ -52,8 +49,7 @@ function validateRegisterEmail() {
     })
 }
 
-// 비밀번호 유효성 검사
-function validateRegisterPassword() {
+function validateRegisterPassword() { // 비밀번호 유효성 검사
     const password1 = document.getElementById("password1").value;
     const errorMessage = document.getElementById("password-error-message");
 
@@ -97,8 +93,7 @@ function validateRegisterPassword() {
     }
 }
 
-// 비밀번호 확인 유효성 검사
-function validateRegisterPasswordChk() {
+function validateRegisterPasswordChk() { // 비밀번호 확인 유효성 검사
     const password1 = document.getElementById("password1").value;
     const password2 = document.getElementById("password2").value;
     const errorMessage = document.getElementById("passwordChk-error-message");
@@ -112,8 +107,7 @@ function validateRegisterPasswordChk() {
     }
 }
 
-// 이메일 인증
-function sendEmailVerification() {
+function sendEmailVerification() { // 이메일 인증
     const email = document.getElementById("email").value;
 
     $.ajax({
@@ -131,8 +125,7 @@ function sendEmailVerification() {
     })
 }
 
-// 일반 회원가입
-function register() {
+function register() { // 일반 회원가입
     event.preventDefault();
 
     const id = document.getElementById("id").value;

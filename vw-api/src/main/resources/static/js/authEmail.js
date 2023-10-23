@@ -1,4 +1,4 @@
-$(document).ready(function authEmail() { // 페이지 로드 시, 이메일 인증 확인을 실행
+$(document).ready(function authEmail() { // 페이지 로드 시, 이메일 인증 확인 실행
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 

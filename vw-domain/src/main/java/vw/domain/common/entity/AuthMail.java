@@ -10,13 +10,12 @@ import org.springframework.data.redis.core.index.Indexed;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @RedisHash(value = "auth_email")
-public class AuthMail {
-	@Id private Long id;
-	@Indexed private String email;
-	@Indexed private String authKey;
-	@Indexed private Boolean authenticated;
-
-	@TimeToLive private int ttl;
+public class AuthMail { // 이메일 인증 엔티티
+	@Id private Long id; // 이메일 인증 식별자
+	@Indexed private String email; // 이메일 인증 이메일
+	@Indexed private String authKey; // 이메일 인증 키
+	@Indexed private Boolean authenticated; // 이메일 인증 여부
+	@TimeToLive private int ttl; // 이메일 인증 유효 시간
 
 	@Builder
 	public AuthMail(String email, String authKey, Boolean authenticated, int ttl) {
