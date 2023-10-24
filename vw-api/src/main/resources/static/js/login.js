@@ -43,6 +43,10 @@ function login() { // 로그인 버튼 클릭 시, 아이디 혹은 비밀번호
             password: password
         },
         success: function (data) {
+            saveAccessToken(data.accessToken);
+            saveRefreshToken(data.refreshToken);
+
+
             window.location.assign("/"); // 로그인 성공 후의 리디렉션
         },
         error: function (error) {
@@ -51,4 +55,21 @@ function login() { // 로그인 버튼 클릭 시, 아이디 혹은 비밀번호
             return false;
         }
     })
+}
+
+function saveAccessToken(accessToken) {
+    const cookieName = "accessToken";
+    const expirationDate = new Date();
+
+    expirationDate.setTime(expirationDate.getTime() + (15 * 60 * 1000)); // 토큰을 쿠키에 저장 (15분을 밀리초로 변환하여 더함)
+
+    document.cookie = `${cookieName}=${accessToken}; expires=${expirationDate.toUTCString()}; path=/`;
+}
+
+function saveRefreshToken(refreshToken) { // refreshToken 쿠키에 저장
+    const cookieName = "refreshToken";
+    const expirationDate = new Date();
+
+    expirationDate.setDate(expirationDate.getDate() + 7); // 토큰을 쿠키에 저장 (유효 기간은 7일로 설정)
+    document.cookie = `${cookieName}=${refreshToken}; expires=${expirationDate.toUTCString()}; path=/`;
 }
