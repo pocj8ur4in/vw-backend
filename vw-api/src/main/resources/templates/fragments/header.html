@@ -16,7 +16,7 @@
                 </ul>
 
                 <div class="dropdown text-end">
-                    <!-- 로그인이 안된 경우  -->
+                    <!-- 로그인이 안된 경우 -->
                     <div sec:authorize="!isAuthenticated()">
                         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle-split"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,6 +26,19 @@
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" th:href="@{/user/login}">로그인</a></li>
                             <li><a class="dropdown-item" th:href="@{/user/register}">회원가입</a></li>
+                        </ul>
+                    </div>
+                    <!-- 로그인이 된 경우 -->
+                    <div sec:authorize="isAuthenticated()">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle-split"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                                 width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" th:href="@{/}">프로필</a></li>
+                            <li><a class="dropdown-item" th:href="@{/}">설정</a></li>
+                            <li><a class="dropdown-item" th:href="@{/}">로그아웃</a></li>
                         </ul>
                     </div>
                 </div>

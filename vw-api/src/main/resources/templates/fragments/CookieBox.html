@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<style>
+    .cookie-consent {
+        position: relative;
+        display: none; /* 처음에는 보이지 않도록 설정 */
+        z-index: 9999; /* 가장 위에 표시 */
+    }
+</style>
+
+<!-- Thymeleaf 템플릿을 사용하여 알림 창을 표시 -->
+<div class="modal modal-sheet position-static d-block bg-body-secondary p-1 py-md-5 row" tabindex="-1" role="dialog" id="modalSheet" th:fragment="CookieBoxFragment">
+    <div class="modal-dialog cookie-consent bottom-0 mb-1 position-fixed col-sm-6" id="cookieConsent" role="document">
+        <div class="modal-content rounded-3 shadow" style="width: 80%;">
+            <div class="modal-body p-4 text-center">본 사이트는 소셜 미디어 기능 및 개인화된 콘텐츠를 제공하기 위해 쿠키를 사용하고 있습니다.</div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end" onclick="agreeCookieConsent()"><strong>허용</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0" data-bs-dismiss="modal"  onclick="disagreeCookieConsent()">거부</button>
+            </div>
+        </div>
+
+        <script>
+            // 웹 페이지가 로드될 때 쿠키 설정 동의 알림을 표시
+            if (localStorage.getItem("cookieConsent") === "agree" || localStorage.getItem("cookieConsent") === "disagree")
+                document.getElementById("cookieConsent").style.display = "none";
+            else
+                document.getElementById("cookieConsent").style.display = "block";
+
+            function agreeCookieConsent() { // 동의 버튼을 클릭할 때 쿠키 설정 동의를 저장하고 알림을 숨김
+                localStorage.setItem("cookieConsent", "agree");
+
+                // 쿠키 설정 동의 알림을 숨김
+                document.getElementById("cookieConsent").style.display = "none";
+            }
+
+            function disagreeCookieConsent() { // 거부 버튼을 클릭할 때 쿠키 설정 거부를 저장하고 알림을 숨김
+                localStorage.setItem("cookieConsent", "disagree");
+
+                // 쿠키 설정 동의 알림을 숨김
+                document.getElementById("cookieConsent").style.display = "none";
+            }
+        </script>
+    </div>
+</div>
