@@ -38,6 +38,8 @@ public enum UserErrorCode implements BaseErrorCode {
 	INCORRECT_PASSWORD(BAD_REQUEST, "USER_400_12", "비밀번호 형식이 잘못되었습니다."),
 	@ExplainError("비밀번호와 비밀번호 확인이 일치하지 않는 경우")
 	DIFFERENT_PASSWORD(BAD_REQUEST, "USER_400_13", "입력한 비밀번호와 비밀번호 확인이 서로 일치하지 않습니다."),
+	@ExplainError("입력한 비밀번호가 일치하지 않는 경우")
+	UN_MATCH_PASSWORD(BAD_REQUEST, "USER_400_14", "비밀번호를 바르게 입력해주세요."),
 	@ExplainError("사용자 정보를 찾을 수 없는 경우")
 	USER_NOT_FOUND(NOT_FOUND, "USER_404_1", "사용자 정보를 찾을 수 없습니다."),
 	@ExplainError("사용자의 회원가입이 실패한 경우")

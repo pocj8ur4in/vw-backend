@@ -20,34 +20,35 @@ function validateLoginPassword() { // 비밀번호 입력창을 벗어났을 때
     }
 }
 
-function validateLogin() { // 로그인 버튼 클릭 시, 아이디 혹은 비밀번호가 공란인지 확인
-    const username = document.getElementById("id").value;
+function login() { // 로그인 버튼 클릭 시, 아이디 혹은 비밀번호가 공란인지 확인하고 로그인 실행
+    const id = document.getElementById("id").value;
     const password = document.getElementById("password").value;
 
-    if (username.trim() === "") {
+    if (id.trim() === "") {
         alert("아이디를 입력해주세요.");
+        location.reload();
         return false;
     } else if(password.trim() === "") {
         alert("비밀번호를 입력해주세요.");
+        location.reload();
         return false;
     }
-
-    return true;
-}
-
-function login() { // 일반 로그인
-    const id = document.getElementById("id").value;
-    const password = document.getElementById("password").value;
 
     $.ajax({
         url: "/v1/user/login",
         type : 'POST',
+        async : false,
         data: {
             id: id,
             password: password
         },
-        error: function (xhr) {
-            alert(xhr.responseText); // 에러 메세지 출력
+        success: function (data) {
+            window.location.assign("/"); // 로그인 성공 후의 리디렉션
+        },
+        error: function (error) {
+            alert(error.responseText); // 에러 메세지 출력
+            location.reload();
+            return false;
         }
     })
 }

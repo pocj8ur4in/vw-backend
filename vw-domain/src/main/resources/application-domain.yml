@@ -58,3 +58,6 @@ custom:
     address: ${CUSTOM_EMAIL_ADDRESS:http://localhost:8080}
     email: ${CUSTOM_EMAIL_EMAIL}
     name: ${CUSTOM_EMAIL_NAME}
+  jwt:
+    accessExp: ${CUSTOM_JWT_ACCESS_EXP:900} # 만료 시간
+    refreshExp: ${CUSTOM_JWT_REFRESH_EXP:604800} # 갱신 시간

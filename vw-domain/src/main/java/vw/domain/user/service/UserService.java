@@ -2,6 +2,7 @@ package vw.domain.user.service;
 
 import static vw.core.statics.BaseStatic.*;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -123,50 +124,15 @@ public class UserService { // 회원 서비스
 						.build()); // 사용자를 저장소에 저장
 	}
 
-	// public LoginResponse login(String id, String password) {
-	//	logger.info(">> 로그인");
-	//  userAdaptor.existsUserByUserAuth_Id();
-	// }
+	public long login(String id, String password) {
+		logger.info(">> 로그인");
 
-	/*
-	public LoginResponse login(LoginRequest req) { // 일반 로그인
-		if (!userRepository.existsUserByUserAuth_Id(req.getId())) // 입력받은 아이디가 존재하지 않는 경우
-			throw LoginFailureException.baseCodeException;
+		User user = userAdaptor.findUserByUserAuth_Id(id);
 
-		User user =
-				userRepository
-						.findUserByUserAuth_Id(req.getId()) // 입력받은 아이디에 해당하는 회원 정보 불러옴
-						.orElseThrow(LoginFailureException::new);
-
-		if (!passwordEncoder.matches(
-				req.getPassword(),
-				user.getUserAuth().getPassword())) { // 입력받은 비밀번호와 저장된 비밀번호가 일치하지 않는 경우
-			throw LoginFailureException.baseCodeException;
+		if (!Objects.equals(user.getUserAuth().getPassword(), password)) {
+			throw UnMatchPasswordException.baseCodeException; // 입력한 비밀번호가 틀린 경우
 		}
 
-		// AccessToken, refreshToken 생성
-		String accessToken =
-				jwtHandler.generateAccessToken(user.getIndex(), user.getUserType().getKey());
-		String refreshToken = jwtHandler.generateRefreshToken(user.getIndex());
-
-		// AccessToken, refreshToken 반환
-		return LoginResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
+		return user.getIndex();
 	}
-
-	public User oauthRegister(){ // OAuth 회원가입
-
-	}
-
-	public User oauthLogin(){ // OAuth 로그인
-
-	}
-
-	public void logout(){ // 로그아웃
-
-	}
-
-	public void resign(){ // 회원탈퇴
-
-	}
-	*/
 }

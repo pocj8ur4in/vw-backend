@@ -35,4 +35,13 @@ public class UserAdaptor { // 회원 레포지토리 어댑터
 			throw RegisterFailureException.baseCodeException; // 회원가입이 실패한 경우
 		}
 	}
+
+	public User findUserByUserAuth_Id(String id) { // 아이디로 회원을 조회
+		return userRepository
+				.findUserByUserAuth_Id(id)
+				.orElseThrow(
+						() ->
+								CouldNotFoundUserException
+										.baseCodeException); // 검색한 회원 정보가 존재하지 않는 경우
+	}
 }

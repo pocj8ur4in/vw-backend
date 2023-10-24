@@ -24,7 +24,7 @@ public enum GlobalErrorCode implements BaseErrorCode {
 	@ExplainError("인증 이메일 정보에 대한 탐색 결과가 존재하지 않을 때 발생하는 오류")
 	COULD_NOT_FOUND_AUTH_MAIL(INTERNAL_SERVER, "EMAIL_500_5", "값에 해당하는 이메일 인증 정보가 존재하지 않습니다."),
 	@ExplainError("이메일 인증이 실패하였을 때 발생하는 오류")
-	AUTH_MAIL_FAIL(INTERNAL_SERVER, "EMAIL_500_6", "이메일 인증 활성화가 실패하였습니다."),
+	AUTH_MAIL_FAIL(INTERNAL_SERVER, "EMAIL_500_6", "이메일 인증이 실패하였습니다."),
 	@ExplainError("이미 전송된 이메일 주소인 경우 발생하는 오류")
 	ALREADY_EMAIL_SEND(FORBIDDEN, "EMAIL_403_1", "해당 주소에 이미 인증 이메일이 전송되었습니다."),
 	@ExplainError("이미 인증된 이메일 주소인 경우 발생하는 오류")

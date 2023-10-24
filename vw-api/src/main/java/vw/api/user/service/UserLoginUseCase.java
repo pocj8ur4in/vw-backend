@@ -5,20 +5,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import vw.core.annotation.UseCase;
 import vw.core.dto.user.LoginRequest;
+import vw.core.dto.user.LoginResponse;
 import vw.core.exception.error.BaseCodeException;
+import vw.domain.common.handler.JwtHandler;
 import vw.domain.user.service.UserService;
 
 @UseCase
 @RequiredArgsConstructor
-public class UserLoginUseCase { // 로그인 실행
+public class UserLoginUseCase { // 일반 로그인 실행
 	private final UserService userService;
+	private final JwtHandler jwtHandler;
 
 	@Transactional
-	public ResponseEntity<String> execute(LoginRequest req) {
+	public ResponseEntity<?> execute(LoginRequest req) {
 		try {
-			// LoginResponse loginResponse = userService.login(req.getId(), req.getPassword());
+			Long index = userService.login(req.getId(), req.getPassword());
+			LoginResponse loginResponse =
+					LoginResponse.builder()
+							.accessToken(jwtHandler.generateAccessToken(index))
+							.refreshToken(jwtHandler.generateRefreshToken(index))
+							.build();
 
-			return ResponseEntity.ok().body("로그인이 성공하였습니다.");
+			return ResponseEntity.ok(loginResponse);
 		} catch (BaseCodeException baseCodeException) {
 			return ResponseEntity.status(baseCodeException.getErrorReason().getStatus())
 					.body(baseCodeException.getErrorReason().getReason());
