@@ -3,6 +3,8 @@ package vw.domain.common.handler;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
@@ -83,12 +85,13 @@ public class EmailHandler { // 이메일 핸들러
 		authMailAdaptor.existsAuthMailByEmail(email);
 	}
 
-	private String createAuthKey() { // 인증 키 생성
+	private String createAuthKey() throws NoSuchAlgorithmException { // 인증 키 생성
 		logger.info(">> 인증 키 생성");
 
 		int num = 0;
 
-		Random random = new Random();
+		Random random = SecureRandom.getInstanceStrong();
+
 		StringBuilder stringBuilder = new StringBuilder();
 
 		do {
