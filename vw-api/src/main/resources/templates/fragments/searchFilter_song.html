@@ -2,14 +2,235 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="searchFilterFragment">
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            const yearSelect = document.getElementById("year");
+            const monthSelect = document.getElementById("month");
+            const daySelect = document.getElementById("day");
+
+            yearSelect.addEventListener("change", function () {
+                const selectedYear = yearSelect.value;
+                const selectedMonth = monthSelect.value;
+
+                if (selectedYear !== "") {
+                    if (selectedMonth !== "") {
+                        daySelect.innerHTML = '';
+                        const option = document.createElement("option");
+                        option.value = "";
+                        option.text = "일...";
+                        daySelect.appendChild(option);
+
+                        const lastDay = new Date(selectedYear, selectedMonth, 0).getDate();
+
+                        for (let i = 1; i <= lastDay; i++) {
+                            const option = document.createElement("option");
+                            option.value = i.toString();
+                            option.text = i.toString() + "일";
+                            daySelect.appendChild(option);
+                        }
+                        daySelect.style.display = "block";
+                    }
+
+                    monthSelect.style.display = "block";
+                } else {
+                    monthSelect.style.display = "none";
+                    monthSelect.value = "";
+                    daySelect.style.display = "none";
+                    daySelect.value = "";
+                }
+            });
+
+            monthSelect.addEventListener("change", function () {
+                const selectedYear = yearSelect.value;
+                const selectedMonth = monthSelect.value;
+
+                if (selectedMonth !== "") {
+                    daySelect.innerHTML = '';
+                    const option = document.createElement("option");
+                    option.value = "";
+                    option.text = "일...";
+                    daySelect.appendChild(option);
+
+
+                    const lastDay = new Date(selectedYear, selectedMonth, 0).getDate();
+
+                    for (let i = 1; i <= lastDay; i++) {
+                        const option = document.createElement("option");
+                        option.value = i.toString();
+                        option.text = i.toString() + "일";
+                        daySelect.appendChild(option);
+                    }
+
+                    daySelect.style.display = "block";
+
+                } else {
+                    daySelect.style.display = "none";
+                    daySelect.value = "";
+                }
+            });
+        });
+
+        function toggleActive(element) {
+            var buttons = document.querySelectorAll('.btn.btn-outline-secondary');
+
+            var allButtonsActive = true;
+            buttons.forEach(function (button) {
+                if (!button.classList.contains("active")) {
+                    allButtonsActive = false;
+                }
+            });
+
+            if (allButtonsActive) {
+                buttons.forEach(function (button) {
+                    if (button !== element) {
+                        button.classList.remove("active");
+                    }
+                });
+            } else {
+                element.classList.toggle("active");
+            }
+        }
+
+    </script>
     <div class="container">
         <div class="row justify-content-center">
-            <form role="search" class="col-md-10">
-                <div class="input-group">
-                    <label for="search"></label><input class="form-control me-2" type="search" id="search" placeholder="검색어를 입력하세요...">
-                    <button class="btn btn-outline-success col-1" type="submit">필터</button>
-                    <button class="btn btn-outline-success col-1" type="submit">정렬</button>
-                    <button class="btn btn-outline-success col-1" type="submit">검색</button>
+            <form role="search" class="card col-md-12 row-cols-1">
+                <div class="card-body input-group">
+                    <label for="노래 검색"></label><input class="form-control me-2" type="search" id="노래 검색" placeholder="검색어를 입력하세요...">
+                    <div class="btn btn-outline-success col-2">검색</div>
+                </div>
+                <div id="details">
+                    <div class="card-body input-group">
+                        <h6 class="col-2">노래 유형</h6>
+                        <div class="input-group col-10">
+                            <div class="btn btn-outline-secondary col-2 active" onclick="toggleActive(this)">
+                                오리지널
+                            </div>
+                            <div class="btn btn-outline-secondary col-2 active" onclick="toggleActive(this)">
+                                커버
+                            </div>
+                            <div class="btn btn-outline-secondary col-2 active" onclick="toggleActive(this)">
+                                리마스터
+                            </div>
+                            <div class="btn btn-outline-secondary col-2 active" onclick="toggleActive(this)">
+                                리믹스
+                            </div>
+                            <div class="btn btn-outline-secondary col-2 active" onclick="toggleActive(this)">
+                                매쉬업
+                            </div>
+                            <div class="btn btn-outline-secondary col-2 active" onclick="toggleActive(this)">
+                                뮤직 비디오
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body input-group">
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                참여 아티스트
+                            </h6>
+                            <div class="input-group">
+                                <label for="song_artist"></label>
+                                <input class="form-control me-2" type="search" id="song_artist" placeholder="검색어를 입력하세요...">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                참여 가수
+                            </h6>
+                            <div class="input-group">
+                                <label for="song_vocalist"></label>
+                                <input class="form-control me-2 col-12" type="search" id="song_vocalist" placeholder="검색어를 입력하세요...">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                상위 항목
+                            </h6>
+                            <div class="input-group col-md-12">
+                                <label for="parent"></label>
+                                <input class="form-control col-12" type="search" id="parent" placeholder="검색어를 입력하세요...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body input-group">
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                정렬
+                            </h6>
+                            <div class="input-group">
+                                <label for="sort"></label>
+                                <select class="form-select me-2" id="sort" required="">
+                                    <option value="name">이름</option>
+                                    <option value="published_upper">발매일 (최신)</option>
+                                    <option value="published_lower">발매일 (과거)</option>
+                                    <option value="created_upper">생성일 (최신)</option>
+                                    <option value="created_lower">생성일 (과거)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                개수
+                            </h6>
+                            <div class="input-group col-md-12">
+                                <label for="number"></label>
+                                <select class="form-select me-2" id="number" required="">
+                                    <option value="10">10개</option>
+                                    <option value="10">20개</option>
+                                    <option value="10">50개</option>
+                                    <option value="10">100개</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                발매일
+                            </h6>
+                            <div class="input-group col-md-4">
+                                <label for="year"></label>
+                                <select class="form-select" id="year" required="">
+                                    <option value="">연도...</option>
+                                    <option value="2007">2007년</option>
+                                    <option value="2008">2008년</option>
+                                    <option value="2009">2009년</option>
+                                    <option value="2010">2010년</option>
+                                    <option value="2011">2011년</option>
+                                    <option value="2012">2012년</option>
+                                    <option value="2013">2013년</option>
+                                    <option value="2014">2014년</option>
+                                    <option value="2015">2015년</option>
+                                    <option value="2016">2016년</option>
+                                    <option value="2017">2017년</option>
+                                    <option value="2018">2018년</option>
+                                    <option value="2019">2019년</option>
+                                    <option value="2020">2020년</option>
+                                    <option value="2021">2021년</option>
+                                    <option value="2022">2022년</option>
+                                    <option value="2023">2023년</option>
+                                    <option value="2023">2024년</option>
+                                </select>
+                                <label for="month"></label>
+                                <select class="form-select" id="month" required="" style="display: none;">
+                                    <option value="">월...</option>
+                                    <option value="1">01월</option>
+                                    <option value="2">02월</option>
+                                    <option value="3">03월</option>
+                                    <option value="4">04월</option>
+                                    <option value="5">05월</option>
+                                    <option value="6">06월</option>
+                                    <option value="7">07월</option>
+                                    <option value="8">08월</option>
+                                    <option value="9">09월</option>
+                                    <option value="10">10월</option>
+                                    <option value="11">11월</option>
+                                    <option value="12">12월</option>
+                                </select>
+                                <label for="day"></label>
+                                <select class="form-select" id="day" required="" style="display: none;">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

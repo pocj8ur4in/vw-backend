@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class LoginResponse {
-	private String accessToken; // accessToken
-	private String refreshToken; // refreshToken
+	private String accessToken; // 액세스 토큰
+	private String refreshToken; // 리프래쉬 토큰
 }

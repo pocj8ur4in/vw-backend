@@ -124,8 +124,8 @@ public class UserService { // 회원 서비스
 						.build()); // 사용자를 저장소에 저장
 	}
 
-	public long login(String id, String password) {
-		logger.info(">> 로그인");
+	public long login(String id, String password) { // 일반 로그인
+		logger.info(">> 일반 로그인");
 
 		User user = userAdaptor.findUserByUserAuth_Id(id);
 
