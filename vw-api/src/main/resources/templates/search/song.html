@@ -16,6 +16,7 @@
   <script th:src="@{../static/js/color-modes.js}"></script>
   <script th:src="@{../static/js/bootstrap.bundle.min.js}"></script>
   <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+  <script th:src="@{../static/js/songSearch.js}"></script>
 
   <!-- 웹 페이지의 제목 지정 -->
   <title>노래 검색</title>
@@ -30,17 +31,6 @@
 <main>
   <div class="my-3 p-3 bg-body rounded shadow-sm container">
     <div th:insert="~{fragments/searchFilter_song :: searchFilterFragment}"></div>
-
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
-    <div th:insert="~{fragments/searchBoxContent_song :: searchBoxContentFragment}"></div>
   </div>
 </main>
 

@@ -1,0 +1,100 @@
+name: Data Scraping # Github Actions의 workflow 이름 정의
+
+on:
+  push:
+    branches:
+      - master # 이벤트 트리거 설정 : master에 푸시할 때 동작
+
+# 실행 환경 설정
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    strategy: # 동일한 workflow를 여러 가지 다른 환경에서 실행시킴
+      matrix:
+        python-version: [ 3.x ]
+
+    steps:
+      # 레포지토리를 체크아웃하여 워크스페이스에 가져옴
+      - name: Check Out The Repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      # 파이썬 환경 설정
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # 파이썬 의존성 추가
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
+          pip install requests
+          pip install beautifulsoup4
+
+      # 크롬 의존성 추가
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-unfonts-core
+          sudo apt-get install fonts-unfonts-extra
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add        
+          sudo apt-get install google-chrome-stable    
+          wget https://chromedriver.storage.googleapis.com/99.0.4844.51/chromedriver_linux64.zip
+          unzip ./chromedriver_linux64.zip
+
+      # 파이썬 코드 실행
+      - name: Run Python File
+        env:
+          DATA_SCRAPING_URL: ${{ secrets.DATA_SCRAPING_URL }}
+          DATA_SCRAPING_URL_1: ${{ secrets.DATA_SCRAPING_URL_1 }}
+          DATA_SCRAPING_URL_2: ${{ secrets.DATA_SCRAPING_URL_2 }}
+          DATA_SCRAPING_URL_3: ${{ secrets.DATA_SCRAPING_URL_3 }}
+          DATA_SCRAPING_URL_4: ${{ secrets.DATA_SCRAPING_URL_4 }}
+
+        run: |
+          python - <<EOF
+          from selenium import webdriver  # 셀레니움 웹 드라이버
+          from selenium.webdriver.support.ui import WebDriverWait  # 셀레니움에서 이벤트가 발생할 때까지 대기
+          from selenium.webdriver.common.by import By  # 셀레니움에서 특정 HTML 요소를 접근하는 방식을 정의
+          from selenium.webdriver.support import expected_conditions as EC  # 셀레니움에서 조건을 설정하고 조건에 부합하는지 안하는지 판단
+          from selenium.common.exceptions import NoSuchElementException, TimeoutException  # 셀레니움에서 발생할 수 있는 예외
+          import os
+          from bs4 import BeautifulSoup
+          from datetime import timedelta, datetime
+          
+          def def_end_of_scraping_data(url):  # 데이터 스크래핑 범위 정의 (song, artist)
+            try:
+              response = requests.get(url)
+              response.raise_for_status()  # 오류가 발생하면 예외를 발생
+
+              soup = BeautifulSoup(response.content, 'html.parser')
+
+              # 'td' 태그를 찾아서 첫 번째 요소를 가져옴
+              td = soup.find('td')
+              
+              if td:
+                # 'a' 태그를 찾아서 'href' 속성 값을 가져옴
+                a = td.find('a')
+                  if a and 'href' in a.attrs:
+                    href = a['href']
+                    return href.split("/")[-1]
+            except Exception as e:
+              return None
+        
+          
+          
+          if __name__ == "__main__":
+            song_start = 550927  # 수정!
+            artist_start = 128098  # 수정!
+            song_end = int(def_end_of_scraping_data(os.getenv('DATA_SCRAPING_URL_1')))
+            artist_end = int(def_end_of_scraping_data(os.getenv('DATA_SCRAPING_URL_3')))
+            
+            print(song_end)
+            print(artist_end)
+          EOF

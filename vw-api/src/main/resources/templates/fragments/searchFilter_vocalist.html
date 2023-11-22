@@ -2,39 +2,53 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="searchFilterFragment">
+    <script th:inline="javascript">
+        function toogleDetails(element) {
+            const yearSelect = document.getElementById("details");
+            element.classList.toggle("active");
+
+            if (yearSelect.style.display === "none") {
+                yearSelect.style.display = "block";
+            } else {
+                yearSelect.style.display = "none";
+            }
+        }
+    </script>
     <div class="container">
         <div class="row justify-content-center">
             <form role="search" class="card col-md-12 row-cols-1">
                 <div class="card-body input-group">
                     <label for="노래 검색"></label><input class="form-control me-2" type="search" id="노래 검색" placeholder="검색어를 입력하세요...">
-                    <div class="btn btn-outline-success col-2">검색</div>
+                    <div class="btn btn-outline-success col-2" onclick="toogleDetails(this)">상세</div>
                 </div>
-                <div class="card-body input-group">
-                    <div class="col-4">
-                        <h6 class="col-6">
-                            정렬
-                        </h6>
-                        <div class="input-group">
-                            <label for="sort"></label>
-                            <select class="form-select me-2" id="sort" required="">
-                                <option value="name">이름</option>
-                                <option value="created_upper">생성일 (최신)</option>
-                                <option value="created_lower">생성일 (과거)</option>
-                            </select>
+                <div id="details" style="display: none;">
+                    <div class="card-body input-group">
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                정렬
+                            </h6>
+                            <div class="input-group">
+                                <label for="sort"></label>
+                                <select class="form-select me-2" id="sort" required="">
+                                    <option value="name">이름</option>
+                                    <option value="created_upper">생성일 (최신)</option>
+                                    <option value="created_lower">생성일 (과거)</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <h6 class="col-6">
-                            개수
-                        </h6>
-                        <div class="input-group col-md-12">
-                            <label for="number"></label>
-                            <select class="form-select me-2" id="number" required="">
-                                <option value="10">10개</option>
-                                <option value="10">20개</option>
-                                <option value="10">50개</option>
-                                <option value="10">100개</option>
-                            </select>
+                        <div class="col-4">
+                            <h6 class="col-6">
+                                개수
+                            </h6>
+                            <div class="input-group col-md-12">
+                                <label for="number"></label>
+                                <select class="form-select me-2" id="number" required="">
+                                    <option value="10">10개</option>
+                                    <option value="10">20개</option>
+                                    <option value="10">50개</option>
+                                    <option value="10">100개</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
